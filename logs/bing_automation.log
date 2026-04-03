@@ -1,0 +1,166 @@
+2026-04-03 17:34:38,506 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 17:34:38,506 | INFO | Modo dry-run ativo. Nenhum navegador sera aberto.
+2026-04-03 17:34:38,506 | INFO | URL inicial: https://www.bing.com
+2026-04-03 17:34:38,507 | INFO | Headless: nao
+2026-04-03 17:34:38,507 | INFO | Arquivo de consultas: C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\queries.txt
+2026-04-03 17:34:38,507 | INFO | Intervalo entre buscas: 3.0 segundo(s)
+2026-04-03 17:34:38,507 | INFO | 
+2026-04-03 17:34:38,507 | INFO | [1/5] Python automacao com Selenium
+2026-04-03 17:34:38,507 | INFO | [2/5] Como organizar um projeto Python pequeno
+2026-04-03 17:34:38,507 | INFO | [3/5] Atalhos uteis do Microsoft Edge
+2026-04-03 17:34:38,507 | INFO | [4/5] Dicas para escrever um bom README
+2026-04-03 17:34:38,507 | INFO | [5/5] Boas praticas com testes automatizados
+2026-04-03 17:35:00,391 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 17:35:00,392 | INFO | Modo dry-run ativo. Nenhum navegador sera aberto.
+2026-04-03 17:35:00,392 | INFO | URL inicial: https://www.bing.com
+2026-04-03 17:35:00,392 | INFO | Headless: sim
+2026-04-03 17:35:00,392 | INFO | Arquivo de consultas: C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\queries.txt
+2026-04-03 17:35:00,392 | INFO | Intervalo entre buscas: 3.0 segundo(s)
+2026-04-03 17:35:00,392 | INFO | 
+2026-04-03 17:35:00,392 | INFO | [1/5] Python automacao com Selenium
+2026-04-03 17:35:00,392 | INFO | [2/5] Como organizar um projeto Python pequeno
+2026-04-03 17:35:00,392 | INFO | [3/5] Atalhos uteis do Microsoft Edge
+2026-04-03 17:35:00,392 | INFO | [4/5] Dicas para escrever um bom README
+2026-04-03 17:35:00,392 | INFO | [5/5] Boas praticas com testes automatizados
+2026-04-03 17:35:15,315 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 17:35:15,315 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.example.json
+2026-04-03 17:35:15,315 | INFO | Modo dry-run ativo. Nenhum navegador sera aberto.
+2026-04-03 17:35:15,316 | INFO | URL inicial: https://www.bing.com
+2026-04-03 17:35:15,316 | INFO | Headless: nao
+2026-04-03 17:35:15,316 | INFO | Arquivo de consultas: C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\queries.txt
+2026-04-03 17:35:15,316 | INFO | Intervalo entre buscas: 3.0 segundo(s)
+2026-04-03 17:35:15,316 | INFO | 
+2026-04-03 17:35:15,316 | INFO | [1/5] Python automacao com Selenium
+2026-04-03 17:35:15,316 | INFO | [2/5] Como organizar um projeto Python pequeno
+2026-04-03 17:35:15,316 | INFO | [3/5] Atalhos uteis do Microsoft Edge
+2026-04-03 17:35:15,316 | INFO | [4/5] Dicas para escrever um bom README
+2026-04-03 17:35:15,316 | INFO | [5/5] Boas praticas com testes automatizados
+2026-04-03 17:49:16,630 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 17:49:16,630 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.example.json
+2026-04-03 17:49:16,631 | INFO | Modo dry-run ativo. Nenhum navegador sera aberto.
+2026-04-03 17:49:16,631 | INFO | URL inicial: https://www.bing.com
+2026-04-03 17:49:16,631 | INFO | Headless: nao
+2026-04-03 17:49:16,631 | INFO | Arquivo de consultas: C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\queries.txt
+2026-04-03 17:49:16,631 | INFO | Intervalo entre buscas: 3.0 segundo(s)
+2026-04-03 17:49:16,631 | INFO | 
+2026-04-03 17:49:16,631 | INFO | [1/5] Python automacao com Selenium
+2026-04-03 17:49:16,631 | INFO | [2/5] Como organizar um projeto Python pequeno
+2026-04-03 17:49:16,631 | INFO | [3/5] Atalhos uteis do Microsoft Edge
+2026-04-03 17:49:16,631 | INFO | [4/5] Dicas para escrever um bom README
+2026-04-03 17:49:16,631 | INFO | [5/5] Boas praticas com testes automatizados
+2026-04-03 18:09:48,573 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 18:09:48,573 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.json
+2026-04-03 18:09:48,574 | INFO | Usando driver local em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:09:51,331 | ERROR | Erro ao iniciar o navegador: Message: session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version 138
+Current browser version is 146.0.3856.97 with binary path C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e80c8c55+23461]
+	(No symbol) [0x0x7ff6e801cd40]
+	GetHandleVerifier [0x0x7ff6e8340b88+2611928]
+	(No symbol) [0x0x7ff6e7e2b51d]
+	(No symbol) [0x0x7ff6e7e2a8df]
+	(No symbol) [0x0x7ff6e7e267b1]
+	(No symbol) [0x0x7ff6e7e21045]
+	(No symbol) [0x0x7ff6e7e65a92]
+	(No symbol) [0x0x7ff6e7e5a423]
+	(No symbol) [0x0x7ff6e7e2ea86]
+	(No symbol) [0x0x7ff6e7e2dd11]
+	(No symbol) [0x0x7ff6e7e2e8b3]
+	(No symbol) [0x0x7ff6e7f2e6fd]
+	(No symbol) [0x0x7ff6e7f3ba88]
+	GetHandleVerifier [0x0x7ff6e81a8a9b+940523]
+	GetHandleVerifier [0x0x7ff6e81b17f1+976705]
+	(No symbol) [0x0x7ff6e802a931]
+	(No symbol) [0x0x7ff6e8023314]
+	(No symbol) [0x0x7ff6e8023463]
+	(No symbol) [0x0x7ff6e8014f06]
+	BaseThreadInitThunk [0x0x7ffcd8e77374+20]
+	RtlUserThreadStart [0x0x7ffcd9d7cc91+33]
+
+2026-04-03 18:10:21,275 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 18:10:21,275 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.json
+2026-04-03 18:10:21,276 | INFO | Usando driver local em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:10:23,935 | ERROR | Erro ao iniciar o navegador: Message: session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version 138
+Current browser version is 146.0.3856.97 with binary path C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e80c8c55+23461]
+	(No symbol) [0x0x7ff6e801cd40]
+	GetHandleVerifier [0x0x7ff6e8340b88+2611928]
+	(No symbol) [0x0x7ff6e7e2b51d]
+	(No symbol) [0x0x7ff6e7e2a8df]
+	(No symbol) [0x0x7ff6e7e267b1]
+	(No symbol) [0x0x7ff6e7e21045]
+	(No symbol) [0x0x7ff6e7e65a92]
+	(No symbol) [0x0x7ff6e7e5a423]
+	(No symbol) [0x0x7ff6e7e2ea86]
+	(No symbol) [0x0x7ff6e7e2dd11]
+	(No symbol) [0x0x7ff6e7e2e8b3]
+	(No symbol) [0x0x7ff6e7f2e6fd]
+	(No symbol) [0x0x7ff6e7f3ba88]
+	GetHandleVerifier [0x0x7ff6e81a8a9b+940523]
+	GetHandleVerifier [0x0x7ff6e81b17f1+976705]
+	(No symbol) [0x0x7ff6e802a931]
+	(No symbol) [0x0x7ff6e8023314]
+	(No symbol) [0x0x7ff6e8023463]
+	(No symbol) [0x0x7ff6e8014f06]
+	BaseThreadInitThunk [0x0x7ffcd8e77374+20]
+	RtlUserThreadStart [0x0x7ffcd9d7cc91+33]
+
+2026-04-03 18:10:34,712 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 18:10:34,712 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.json
+2026-04-03 18:10:34,713 | INFO | Usando driver local em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:10:37,380 | ERROR | Erro ao iniciar o navegador: Message: session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version 138
+Current browser version is 146.0.3856.97 with binary path C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e80c8c55+23461]
+	(No symbol) [0x0x7ff6e801cd40]
+	GetHandleVerifier [0x0x7ff6e8340b88+2611928]
+	(No symbol) [0x0x7ff6e7e2b51d]
+	(No symbol) [0x0x7ff6e7e2a8df]
+	(No symbol) [0x0x7ff6e7e267b1]
+	(No symbol) [0x0x7ff6e7e21045]
+	(No symbol) [0x0x7ff6e7e65a92]
+	(No symbol) [0x0x7ff6e7e5a423]
+	(No symbol) [0x0x7ff6e7e2ea86]
+	(No symbol) [0x0x7ff6e7e2dd11]
+	(No symbol) [0x0x7ff6e7e2e8b3]
+	(No symbol) [0x0x7ff6e7f2e6fd]
+	(No symbol) [0x0x7ff6e7f3ba88]
+	GetHandleVerifier [0x0x7ff6e81a8a9b+940523]
+	GetHandleVerifier [0x0x7ff6e81b17f1+976705]
+	(No symbol) [0x0x7ff6e802a931]
+	(No symbol) [0x0x7ff6e8023314]
+	(No symbol) [0x0x7ff6e8023463]
+	(No symbol) [0x0x7ff6e8014f06]
+	BaseThreadInitThunk [0x0x7ffcd8e77374+20]
+	RtlUserThreadStart [0x0x7ffcd9d7cc91+33]
+
+2026-04-03 18:10:39,467 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\logs\bing_automation.log
+2026-04-03 18:10:39,467 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\config.json
+2026-04-03 18:10:39,468 | INFO | Usando driver local em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:10:42,140 | ERROR | Erro ao iniciar o navegador: Message: session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version 138
+Current browser version is 146.0.3856.97 with binary path C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e80c8c55+23461]
+	(No symbol) [0x0x7ff6e801cd40]
+	GetHandleVerifier [0x0x7ff6e8340b88+2611928]
+	(No symbol) [0x0x7ff6e7e2b51d]
+	(No symbol) [0x0x7ff6e7e2a8df]
+	(No symbol) [0x0x7ff6e7e267b1]
+	(No symbol) [0x0x7ff6e7e21045]
+	(No symbol) [0x0x7ff6e7e65a92]
+	(No symbol) [0x0x7ff6e7e5a423]
+	(No symbol) [0x0x7ff6e7e2ea86]
+	(No symbol) [0x0x7ff6e7e2dd11]
+	(No symbol) [0x0x7ff6e7e2e8b3]
+	(No symbol) [0x0x7ff6e7f2e6fd]
+	(No symbol) [0x0x7ff6e7f3ba88]
+	GetHandleVerifier [0x0x7ff6e81a8a9b+940523]
+	GetHandleVerifier [0x0x7ff6e81b17f1+976705]
+	(No symbol) [0x0x7ff6e802a931]
+	(No symbol) [0x0x7ff6e8023314]
+	(No symbol) [0x0x7ff6e8023463]
+	(No symbol) [0x0x7ff6e8014f06]
+	BaseThreadInitThunk [0x0x7ffcd8e77374+20]
+	RtlUserThreadStart [0x0x7ffcd9d7cc91+33]
+

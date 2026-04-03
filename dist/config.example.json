@@ -1,0 +1,9 @@
+{
+  "queries_file": "queries.txt",
+  "delay_seconds": 3.0,
+  "keep_open_seconds": 5.0,
+  "timeout_seconds": 15,
+  "start_url": "https://www.bing.com",
+  "headless": false,
+  "log_file": "logs/noir_search.log"
+}

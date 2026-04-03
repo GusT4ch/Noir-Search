@@ -1,0 +1,145 @@
+2026-04-03 18:07:34,989 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:07:34,989 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI153722\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:07:34,990 | ERROR | Erro inesperado: No module named 'selenium.webdriver.edge.webdriver'
+Traceback (most recent call last):
+  File "bing_automation_gui.py", line 695, in _run_worker
+  File "bing_automation.py", line 504, in execute_automation
+  File "bing_automation.py", line 355, in build_driver
+  File "selenium\webdriver\__init__.py", line 95, in __getattr__
+  File "importlib\__init__.py", line 88, in import_module
+  File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1335, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'selenium.webdriver.edge.webdriver'
+2026-04-03 18:07:49,103 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:07:49,104 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI153722\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:07:49,105 | ERROR | Erro inesperado: No module named 'selenium.webdriver.edge.webdriver'
+Traceback (most recent call last):
+  File "bing_automation_gui.py", line 695, in _run_worker
+  File "bing_automation.py", line 504, in execute_automation
+  File "bing_automation.py", line 355, in build_driver
+  File "selenium\webdriver\__init__.py", line 95, in __getattr__
+  File "importlib\__init__.py", line 88, in import_module
+  File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1335, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'selenium.webdriver.edge.webdriver'
+2026-04-03 18:10:16,574 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:10:16,574 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI153722\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:10:16,574 | ERROR | Erro inesperado: No module named 'selenium.webdriver.edge.webdriver'
+Traceback (most recent call last):
+  File "bing_automation_gui.py", line 695, in _run_worker
+  File "bing_automation.py", line 504, in execute_automation
+  File "bing_automation.py", line 355, in build_driver
+  File "selenium\webdriver\__init__.py", line 95, in __getattr__
+  File "importlib\__init__.py", line 88, in import_module
+  File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1335, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'selenium.webdriver.edge.webdriver'
+2026-04-03 18:17:19,434 | INFO | Log ativo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:17:19,435 | INFO | Configuracao carregada de C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\config.json
+2026-04-03 18:17:19,441 | INFO | ==================================================
+2026-04-03 18:17:19,442 | INFO | MODO DRY-RUN - Nenhum navegador sera aberto
+2026-04-03 18:17:19,442 | INFO | ==================================================
+2026-04-03 18:17:19,442 | INFO | URL inicial: https://www.bing.com
+2026-04-03 18:17:19,442 | INFO | Headless: nao
+2026-04-03 18:17:19,442 | INFO | Arquivo de consultas: C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\queries.txt
+2026-04-03 18:17:19,442 | INFO | Intervalo entre buscas: 8.0 segundo(s)
+2026-04-03 18:17:19,442 | INFO | Numero de buscas: 5
+2026-04-03 18:17:19,442 | INFO | 
+2026-04-03 18:17:19,442 | INFO | LISTA DE BUSCAS:
+2026-04-03 18:17:19,442 | INFO | ------------------------------
+2026-04-03 18:17:19,442 | INFO | [1/5] Python automacao com Selenium
+2026-04-03 18:17:19,442 | INFO | [2/5] Como organizar um projeto Python pequeno
+2026-04-03 18:17:19,442 | INFO | [3/5] Atalhos uteis do Microsoft Edge
+2026-04-03 18:17:19,442 | INFO | [4/5] Dicas para escrever um bom README
+2026-04-03 18:17:19,442 | INFO | [5/5] Boas praticas com testes automatizados
+2026-04-03 18:18:44,027 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:18:44,028 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI92682\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:18:45,242 | INFO | ==================================================
+2026-04-03 18:18:45,243 | INFO | INICIANDO AUTOMACAO DE PESQUISAS
+2026-04-03 18:18:45,243 | INFO | Total de buscas: 5
+2026-04-03 18:18:45,243 | INFO | Intervalo entre buscas: 8.0 segundos
+2026-04-03 18:18:45,243 | INFO | ==================================================
+2026-04-03 18:18:54,385 | INFO | [1/5] Pesquisando: Python automacao com Selenium
+2026-04-03 18:19:10,432 | INFO | [2/5] Pesquisando: Como organizar um projeto Python pequeno
+2026-04-03 18:19:24,562 | INFO | [3/5] Pesquisando: Atalhos uteis do Microsoft Edge
+2026-04-03 18:19:39,257 | INFO | [4/5] Pesquisando: Dicas para escrever um bom README
+2026-04-03 18:19:55,307 | INFO | [5/5] Pesquisando: Boas praticas com testes automatizados
+2026-04-03 18:20:00,025 | WARNING | 
+2026-04-03 18:20:00,025 | WARNING | Execucao interrompida pelo usuario.
+2026-04-03 18:20:00,025 | INFO | 
+2026-04-03 18:20:00,026 | INFO | ==================================================
+2026-04-03 18:20:00,026 | INFO | RESUMO DA EXECUCAO
+2026-04-03 18:20:00,026 | INFO | ==================================================
+2026-04-03 18:20:00,026 | INFO | Buscas concluidas com sucesso: 5
+2026-04-03 18:20:00,026 | INFO | Falhas: 0
+2026-04-03 18:20:00,026 | INFO | Total de buscas: 5
+2026-04-03 18:20:00,026 | INFO | Tempo total: 1 minuto(s) e 15 segundo(s).
+2026-04-03 18:20:00,026 | INFO | Status: INTERROMPIDO pelo usuario
+2026-04-03 18:20:00,026 | INFO | ==================================================
+2026-04-03 18:25:31,645 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:25:31,646 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI34922\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:25:32,797 | INFO | ==================================================
+2026-04-03 18:25:32,797 | INFO | INICIANDO AUTOMACAO DE PESQUISAS
+2026-04-03 18:25:32,797 | INFO | Total de buscas: 5
+2026-04-03 18:25:32,797 | INFO | Intervalo entre buscas: 8.0 segundos
+2026-04-03 18:25:32,797 | INFO | ==================================================
+2026-04-03 18:25:42,186 | INFO | [1/5] Pesquisando: Python automacao com Selenium
+2026-04-03 18:25:47,916 | WARNING | 
+2026-04-03 18:25:47,916 | WARNING | Execucao interrompida pelo usuario.
+2026-04-03 18:25:47,916 | INFO | 
+2026-04-03 18:25:47,916 | INFO | ==================================================
+2026-04-03 18:25:47,916 | INFO | RESUMO DA EXECUCAO
+2026-04-03 18:25:47,916 | INFO | ==================================================
+2026-04-03 18:25:47,916 | INFO | Buscas concluidas com sucesso: 1
+2026-04-03 18:25:47,916 | INFO | Falhas: 0
+2026-04-03 18:25:47,916 | INFO | Total de buscas: 5
+2026-04-03 18:25:47,916 | INFO | Tempo total: 0 minuto(s) e 16 segundo(s).
+2026-04-03 18:25:47,916 | INFO | Status: INTERROMPIDO pelo usuario
+2026-04-03 18:25:47,916 | INFO | ==================================================
+2026-04-03 18:41:22,175 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 18:41:22,175 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI39762\edgedriver_win64\msedgedriver.exe
+2026-04-03 18:41:23,686 | INFO | ==================================================
+2026-04-03 18:41:23,686 | INFO | INICIANDO AUTOMACAO DE PESQUISAS
+2026-04-03 18:41:23,686 | INFO | Total de buscas: 5
+2026-04-03 18:41:23,686 | INFO | Intervalo entre buscas: 8.0 segundos
+2026-04-03 18:41:23,686 | INFO | ==================================================
+2026-04-03 18:41:33,074 | INFO | [1/5] Pesquisando: Python automacao com Selenium
+2026-04-03 18:41:48,105 | INFO | [2/5] Pesquisando: Como organizar um projeto Python pequeno
+2026-04-03 18:41:50,821 | WARNING | 
+2026-04-03 18:41:50,821 | WARNING | Execucao interrompida pelo usuario.
+2026-04-03 18:41:50,821 | INFO | 
+2026-04-03 18:41:50,822 | INFO | ==================================================
+2026-04-03 18:41:50,822 | INFO | RESUMO DA EXECUCAO
+2026-04-03 18:41:50,822 | INFO | ==================================================
+2026-04-03 18:41:50,822 | INFO | Buscas concluidas com sucesso: 2
+2026-04-03 18:41:50,822 | INFO | Falhas: 0
+2026-04-03 18:41:50,822 | INFO | Total de buscas: 5
+2026-04-03 18:41:50,822 | INFO | Tempo total: 0 minuto(s) e 28 segundo(s).
+2026-04-03 18:41:50,822 | INFO | Status: INTERROMPIDO pelo usuario
+2026-04-03 18:41:50,822 | INFO | ==================================================
+2026-04-03 19:44:37,895 | INFO | Studio pronto para rodar. Log salvo em C:\Users\Nano\Documents\Programation\Automação Microssoft Bing\dist\logs\bing_automation.log
+2026-04-03 19:44:37,903 | INFO | Usando driver local em C:\Users\Nano\AppData\Local\Temp\_MEI322\edgedriver_win64\msedgedriver.exe
+2026-04-03 19:44:39,120 | INFO | ==================================================
+2026-04-03 19:44:39,120 | INFO | INICIANDO AUTOMACAO DE PESQUISAS
+2026-04-03 19:44:39,120 | INFO | Total de buscas: 40
+2026-04-03 19:44:39,120 | INFO | Intervalo entre buscas: 8.0 segundos
+2026-04-03 19:44:39,120 | INFO | ==================================================
+2026-04-03 19:44:47,515 | INFO | [1/40] Pesquisando: significado de gratidao
+2026-04-03 19:45:01,864 | INFO | [2/40] Pesquisando: significado de amor proprio
+2026-04-03 19:45:15,341 | INFO | [3/40] Pesquisando: como fazer um curriculo simples
+2026-04-03 19:45:31,046 | INFO | [4/40] Pesquisando: receita de strogonoff de frango simples
+2026-04-03 19:45:37,971 | WARNING | 
+2026-04-03 19:45:37,972 | WARNING | Execucao interrompida pelo usuario.
+2026-04-03 19:45:37,972 | INFO | 
+2026-04-03 19:45:37,972 | INFO | ==================================================
+2026-04-03 19:45:37,972 | INFO | RESUMO DA EXECUCAO
+2026-04-03 19:45:37,972 | INFO | ==================================================
+2026-04-03 19:45:37,972 | INFO | Buscas concluidas com sucesso: 4
+2026-04-03 19:45:37,972 | INFO | Falhas: 0
+2026-04-03 19:45:37,972 | INFO | Total de buscas: 40
+2026-04-03 19:45:37,972 | INFO | Tempo total: 1 minuto(s) e 0 segundo(s).
+2026-04-03 19:45:37,972 | INFO | Status: INTERROMPIDO pelo usuario
+2026-04-03 19:45:37,972 | INFO | ==================================================

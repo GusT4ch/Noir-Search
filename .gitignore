@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.spec
+.venv/
+venv/
+build/
+dist/
+logs/
+*.log
+config.json
+.tmp_tests/
+.tmp_runtime/
+.tmp_remote_repo/
+.driver_update/
+*.lnk
