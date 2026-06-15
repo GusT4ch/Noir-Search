@@ -1,0 +1,16 @@
+{
+  "escola": "Escola Modelo (Ágora)",
+  "ano_referencia": 2025,
+  "segmentos": [
+    {"nome": "Ensino Infantil",  "alunos": 178, "mensalidade_media": 1139.72, "desconto_pct": 0.106188, "inadimplencia_pct": 0.08},
+    {"nome": "Fundamental I",    "alunos": 314, "mensalidade_media": 1168.00, "desconto_pct": 0.098947, "inadimplencia_pct": 0.08},
+    {"nome": "Fundamental II",   "alunos": 156, "mensalidade_media": 1262.92, "desconto_pct": 0.132271, "inadimplencia_pct": 0.08},
+    {"nome": "Ensino Médio",     "alunos": 39,  "mensalidade_media": 1345.00, "desconto_pct": 0.101989, "inadimplencia_pct": 0.08}
+  ],
+  "outras_receitas": [
+    {"nome": "Período Integral", "valor_mensal": 49448.49},
+    {"nome": "Esportes",         "valor_mensal": 34419.48},
+    {"nome": "Livros",           "valor_mensal": 26335.00},
+    {"nome": "Cantina",          "valor_mensal": 2000.00}
+  ]
+}

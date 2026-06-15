@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico Financeiro — Receitas</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root{
+    --azul:#1f3a5f; --azul2:#2e5c8a; --verde:#2e8b57;
+    --cinza:#f4f6f9; --linha:#e1e6ee; --texto:#23303f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--texto);background:var(--cinza)}
+  header{background:var(--azul);color:#fff;padding:22px 28px}
+  header h1{margin:0;font-size:20px}
+  header p{margin:4px 0 0;opacity:.8;font-size:14px}
+  main{max-width:1000px;margin:0 auto;padding:24px}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:20px;margin-bottom:20px}
+  .card h2{margin:0 0 14px;font-size:16px;color:var(--azul)}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+  input{width:100%;padding:8px 10px;border:1px solid var(--linha);border-radius:6px;font-size:14px}
+  .grid{display:grid;gap:12px}
+  .row{display:grid;grid-template-columns:1.4fr .8fr 1fr .9fr .9fr auto;gap:10px;align-items:end;margin-bottom:10px}
+  .row-outras{display:grid;grid-template-columns:2fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px}
+  .hint{font-size:12px;font-weight:400;color:#76808d}
+  button{cursor:pointer;border:none;border-radius:6px;padding:9px 14px;font-size:14px;font-weight:600}
+  .btn-add{background:#eef3fa;color:var(--azul2)}
+  .btn-del{background:#fbeaea;color:#b23b3b;padding:9px 11px}
+  .btn-primary{background:var(--verde);color:#fff;padding:12px 22px;font-size:15px}
+  .btn-ghost{background:transparent;color:var(--azul2);text-decoration:underline;padding:6px}
+  .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .kpi{background:var(--azul);color:#fff;border-radius:10px;padding:16px}
+  .kpi .v{font-size:22px;font-weight:700}
+  .kpi .l{font-size:12px;opacity:.85;margin-top:2px}
+  .kpi.alt{background:var(--verde)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--linha);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--azul);font-size:12px;text-transform:uppercase;letter-spacing:.3px}
+  tfoot td{font-weight:700;background:#f7f9fc}
+  .hidden{display:none}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){.row,.row-outras{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Diagnóstico Econômico/Financeiro — Módulo de Receitas</h1>
+  <p>Preencha os dados da escola. O resultado é calculado automaticamente.</p>
+</header>
+
+<main>
+  <!-- ENTRADA -->
+  <section id="form">
+    <div class="card">
+      <h2>Identificação</h2>
+      <div class="grid" style="grid-template-columns:2fr 1fr">
+        <div><label>Nome da escola</label><input id="escola" placeholder="Ex.: Colégio Exemplo" /></div>
+        <div><label>Ano de referência</label><input id="ano" type="number" value="2025" /></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Receita de mensalidades por nível de ensino</h2>
+      <p class="hint" style="margin-top:-8px">Informe a quantidade de alunos, a mensalidade média, o percentual médio de desconto concedido e a inadimplência estimada de cada nível.</p>
+      <div id="segmentos"></div>
+      <button class="btn-add" onclick="addSegmento()">+ Adicionar nível</button>
+    </div>
+
+    <div class="card">
+      <h2>Outras receitas (mensais)</h2>
+      <p class="hint" style="margin-top:-8px">Período integral, esportes, livros, cantina, eventos, etc.</p>
+      <div id="outras"></div>
+      <button class="btn-add" onclick="addOutra()">+ Adicionar receita</button>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary" onclick="analisar()">Gerar análise ▶</button>
+      <button class="btn-ghost" onclick="preencherModelo()">Preencher com a "Escola Modelo" (teste)</button>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="resultado" class="hidden" style="margin-top:24px">
+    <div class="card">
+      <h2 id="res-titulo">Resultado</h2>
+      <div class="kpis" id="kpis"></div>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <h2>Composição da receita bruta</h2>
+        <canvas id="grafico"></canvas>
+      </div>
+      <div class="card">
+        <h2>Resumo da receita (mensal)</h2>
+        <table id="cascata"></table>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Detalhe por nível de ensino</h2>
+      <table id="detalhe"></table>
+    </div>
+    <div class="actions">
+      <button class="btn-ghost" onclick="voltar()">◀ Editar dados</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const BRL = v => (v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const PCT = v => ((v||0)*100).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+let chart;
+
+function segRow(d={}){
+  const div=document.createElement('div'); div.className='row';
+  div.innerHTML=`
+    <div><label>Nível</label><input class="s-nome" value="${d.nome||''}" placeholder="Ex.: Fundamental I"/></div>
+    <div><label>Alunos</label><input class="s-alunos" type="number" min="0" value="${d.alunos??''}"/></div>
+    <div><label>Mensalidade média</label><input class="s-mens" type="number" step="0.01" min="0" value="${d.mensalidade_media??''}"/></div>
+    <div><label>Desconto %</label><input class="s-desc" type="number" step="0.1" min="0" value="${d.desconto_pct!=null?(d.desconto_pct*100).toFixed(1):''}"/></div>
+    <div><label>Inadimp. %</label><input class="s-inad" type="number" step="0.1" min="0" value="${d.inadimplencia_pct!=null?(d.inadimplencia_pct*100).toFixed(1):''}"/></div>
+    <div><button class="btn-del" onclick="this.closest('.row').remove()">✕</button></div>`;
+  return div;
+}
+function outraRow(d={}){
+  const div=document.createElement('div'); div.className='row-outras';
+  div.innerHTML=`
+    <div><label>Descrição</label><input class="o-nome" value="${d.nome||''}" placeholder="Ex.: Período Integral"/></div>
+    <div><label>Valor mensal</label><input class="o-valor" type="number" step="0.01" min="0" value="${d.valor_mensal??''}"/></div>
+    <div><button class="btn-del" onclick="this.closest('.row-outras').remove()">✕</button></div>`;
+  return div;
+}
+function addSegmento(d){ document.getElementById('segmentos').appendChild(segRow(d)); }
+function addOutra(d){ document.getElementById('outras').appendChild(outraRow(d)); }
+
+function coletar(){
+  const segs=[...document.querySelectorAll('#segmentos .row')].map(r=>({
+    nome:r.querySelector('.s-nome').value||'Nível',
+    alunos:parseInt(r.querySelector('.s-alunos').value||0),
+    mensalidade_media:parseFloat(r.querySelector('.s-mens').value||0),
+    desconto_pct:(parseFloat(r.querySelector('.s-desc').value||0))/100,
+    inadimplencia_pct:(parseFloat(r.querySelector('.s-inad').value||0))/100,
+  })).filter(s=>s.alunos>0);
+  const outras=[...document.querySelectorAll('#outras .row-outras')].map(r=>({
+    nome:r.querySelector('.o-nome').value||'Outra receita',
+    valor_mensal:parseFloat(r.querySelector('.o-valor').value||0),
+  })).filter(o=>o.valor_mensal>0);
+  return {
+    escola:document.getElementById('escola').value||'Escola',
+    ano_referencia:parseInt(document.getElementById('ano').value||2025),
+    segmentos:segs, outras_receitas:outras
+  };
+}
+
+async function analisar(){
+  const payload=coletar();
+  if(!payload.segmentos.length){alert('Adicione ao menos um nível de ensino com alunos.');return;}
+  const resp=await fetch('/api/receitas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  if(!resp.ok){alert('Erro ao calcular. Verifique os dados.');return;}
+  render(await resp.json());
+}
+
+function render(d){
+  const t=d.totais;
+  document.getElementById('form').classList.add('hidden');
+  document.getElementById('resultado').classList.remove('hidden');
+  document.getElementById('res-titulo').textContent=`${d.escola} — Receitas ${d.ano_referencia}`;
+
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="v">${t.total_alunos}</div><div class="l">Alunos</div></div>
+    <div class="kpi"><div class="v">${BRL(t.ticket_medio)}</div><div class="l">Ticket médio</div></div>
+    <div class="kpi"><div class="v">${BRL(t.receita_bruta_mensal)}</div><div class="l">Receita bruta/mês</div></div>
+    <div class="kpi alt"><div class="v">${BRL(t.receita_liquida_mensal)}</div><div class="l">Receita líquida/mês</div></div>
+    <div class="kpi alt"><div class="v">${BRL(t.receita_liquida_anual)}</div><div class="l">Receita líquida/ano</div></div>`;
+
+  document.getElementById('cascata').innerHTML=`
+    <tbody>
+      <tr><td>Receita bruta de mensalidades</td><td>${BRL(t.receita_bruta_mensal)}</td></tr>
+      <tr><td>(−) Descontos</td><td>− ${BRL(t.descontos_mensal)}</td></tr>
+      <tr><td>(=) Receita líquida de mensalidades</td><td>${BRL(t.receita_liquida_mensalidade_mensal)}</td></tr>
+      <tr><td>(+) Outras receitas</td><td>+ ${BRL(t.outras_receitas_mensal)}</td></tr>
+      <tr><td>(=) <b>Receita líquida total</b></td><td><b>${BRL(t.receita_liquida_mensal)}</b></td></tr>
+      <tr><td>Provisão de inadimplência</td><td>${BRL(t.provisao_inadimplencia_mensal)}</td></tr>
+    </tbody>`;
+
+  document.getElementById('detalhe').innerHTML=`
+    <thead><tr><th>Nível</th><th>Alunos</th><th>Mensalidade</th><th>Receita bruta</th><th>Descontos</th><th>Receita líq.</th><th>% do total</th></tr></thead>
+    <tbody>${d.segmentos.map(s=>`<tr>
+      <td>${s.nome}</td><td>${s.alunos}</td><td>${BRL(s.mensalidade_media)}</td>
+      <td>${BRL(s.receita_bruta)}</td><td>${BRL(s.valor_desconto)}</td>
+      <td>${BRL(s.receita_liquida_mensalidade)}</td><td>${s.participacao_pct.toFixed(1)}%</td>
+    </tr>`).join('')}</tbody>`;
+
+  const ctx=document.getElementById('grafico');
+  if(chart) chart.destroy();
+  chart=new Chart(ctx,{type:'doughnut',data:{
+    labels:d.segmentos.map(s=>s.nome),
+    datasets:[{data:d.segmentos.map(s=>s.receita_bruta),
+      backgroundColor:['#1f3a5f','#2e5c8a','#2e8b57','#c9a227','#9b59b6','#e07b39']}]
+  },options:{plugins:{legend:{position:'bottom'}}}});
+}
+
+function voltar(){
+  document.getElementById('resultado').classList.add('hidden');
+  document.getElementById('form').classList.remove('hidden');
+}
+
+async function preencherModelo(){
+  const r=await fetch('/web/escola_modelo.json'); const m=await r.json();
+  document.getElementById('escola').value=m.escola;
+  document.getElementById('ano').value=m.ano_referencia;
+  document.getElementById('segmentos').innerHTML='';
+  document.getElementById('outras').innerHTML='';
+  m.segmentos.forEach(addSegmento);
+  m.outras_receitas.forEach(addOutra);
+}
+
+// estado inicial: uma linha de cada
+addSegmento(); addOutra();
+</script>
+</body>
+</html>
