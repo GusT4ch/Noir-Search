@@ -76,6 +76,22 @@ python -m unittest discover -s tests -v
 > (`data/escola_modelo_folha.json`) usa o quadro de pessoal registrado extraído
 > da planilha.
 
+- **Regime tributário** (`engine/tributos.py`) — a escola escolhe o regime e
+  todos os cálculos passam a respeitar essa escolha:
+  - **Simples Nacional (Anexo III, ensino)** — alíquota efetiva sobre a
+    receita, com o DAS aberto em IRPJ, CSLL, PIS, COFINS, **INSS patronal
+    (CPP)** e ISS. Como o CPP já está no DAS, **não há INSS patronal sobre a
+    folha**.
+  - **Lucro Presumido** — presunção de 32%; IRPJ 15% (+10% adicional),
+    CSLL 9%, PIS 0,65%, COFINS 3%, ISS municipal; **INSS patronal ≈ 28,8%**
+    sobre a folha.
+  - **Lucro Real** — IRPJ/CSLL sobre o lucro; PIS 1,65% e COFINS 7,6%; ISS;
+    INSS patronal sobre a folha.
+  - Endpoints: `POST /api/tributos`; e o `POST /api/folha` aceita o campo
+    `regime`, que define automaticamente o INSS patronal da folha.
+  - **Botão de regime** (interface): `web/Regime-Tributario.html` — página
+    autônoma onde a escola clica no regime e vê o impacto na hora.
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões

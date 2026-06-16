@@ -27,10 +27,13 @@ from engine import (
     Encargos,
     FolhaInput,
     OutraReceita,
+    ParametrosTributarios,
     ReceitasInput,
     SegmentoInput,
     calcular_folha,
     calcular_receitas,
+    calcular_tributos,
+    inss_patronal_pct,
 )
 
 WEB_DIR = os.path.join(os.path.dirname(__file__), "..", "web")
@@ -99,24 +102,59 @@ class EncargosPayload(BaseModel):
     outros: float = 0.0
 
 
+class RegimePayload(BaseModel):
+    regime: str = "simples"               # simples | presumido | real
+    anexo: str = "III"
+    rbt12: float = 0.0
+    iss_pct: float = 0.05
+    inss_cpp: float = 0.20
+    inss_rat: float = 0.03
+    inss_terceiros: float = 0.058
+    irpj_adicional_limite_mensal: float = 20_000.0
+
+
 class FolhaPayload(BaseModel):
     escola: str
     ano_referencia: int
     niveis: List[str]
     colaboradores: List[ColaboradorPayload]
     encargos: EncargosPayload = EncargosPayload()
+    # Se informado, o regime define automaticamente o INSS patronal da folha.
+    regime: RegimePayload | None = None
 
 
 @app.post("/api/folha")
 def analisar_folha(payload: FolhaPayload) -> dict:
+    encargos = Encargos(**payload.encargos.model_dump())
+    if payload.regime is not None:
+        params = ParametrosTributarios(**payload.regime.model_dump())
+        encargos.inss_patronal = inss_patronal_pct(params)
     dados = FolhaInput(
         escola=payload.escola,
         ano_referencia=payload.ano_referencia,
         niveis=payload.niveis,
         colaboradores=[Colaborador(**c.model_dump()) for c in payload.colaboradores],
-        encargos=Encargos(**payload.encargos.model_dump()),
+        encargos=encargos,
     )
     return calcular_folha(dados).as_dict()
+
+
+class TributosPayload(BaseModel):
+    receita_mensal: float = Field(ge=0)
+    folha_bruta_mensal: float = Field(ge=0)
+    lucro_mensal: float | None = None
+    regime: RegimePayload = RegimePayload()
+
+
+@app.post("/api/tributos")
+def analisar_tributos(payload: TributosPayload) -> dict:
+    params = ParametrosTributarios(**payload.regime.model_dump())
+    return calcular_tributos(
+        receita_mensal=payload.receita_mensal,
+        folha_bruta_mensal=payload.folha_bruta_mensal,
+        params=params,
+        lucro_mensal=payload.lucro_mensal,
+    ).as_dict()
 
 
 @app.get("/api/health")

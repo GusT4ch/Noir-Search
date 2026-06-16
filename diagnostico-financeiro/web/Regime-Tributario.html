@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico Financeiro — Regime Tributário</title>
+<style>
+  :root{--azul:#1f3a5f;--azul2:#2e5c8a;--verde:#2e8b57;--cinza:#f4f6f9;--linha:#e1e6ee;--texto:#23303f;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--texto);background:var(--cinza)}
+  header{background:var(--azul);color:#fff;padding:22px 28px}
+  header h1{margin:0;font-size:20px} header p{margin:4px 0 0;opacity:.85;font-size:14px}
+  main{max-width:980px;margin:0 auto;padding:24px}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:20px;margin-bottom:20px}
+  .card h2{margin:0 0 14px;font-size:16px;color:var(--azul)}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+  input{width:100%;padding:8px 10px;border:1px solid var(--linha);border-radius:6px;font-size:14px}
+  .grid{display:grid;gap:14px}
+  .hint{font-size:12px;font-weight:400;color:#76808d}
+  /* Botões de regime */
+  .regimes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .regime-btn{cursor:pointer;border:2px solid var(--linha);background:#fff;border-radius:10px;padding:16px;text-align:left;transition:.15s}
+  .regime-btn:hover{border-color:var(--azul2)}
+  .regime-btn.ativo{border-color:var(--verde);background:#f0f8f3;box-shadow:0 0 0 2px rgba(46,139,87,.15)}
+  .regime-btn .t{font-size:15px;font-weight:700;color:var(--azul)}
+  .regime-btn .d{font-size:12px;color:#76808d;margin-top:4px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .kpi{background:var(--azul);color:#fff;border-radius:10px;padding:16px}
+  .kpi .v{font-size:22px;font-weight:700}.kpi .l{font-size:12px;opacity:.85;margin-top:2px}
+  .kpi.alt{background:var(--verde)} .kpi.warn{background:#b06a1f}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--linha);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--azul);font-size:12px;text-transform:uppercase;letter-spacing:.3px}
+  tfoot td{font-weight:700;background:#f7f9fc}
+  .obs{font-size:13px;background:#fff8ec;border:1px solid #f0e0c0;border-radius:8px;padding:12px;margin-top:12px}
+  .hidden{display:none}
+  .col2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.regimes{grid-template-columns:1fr}.col2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Diagnóstico Econômico/Financeiro — Regime Tributário</h1>
+  <p>Escolha o regime da escola. Os impostos e o INSS patronal são recalculados automaticamente.</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>1) Qual o regime tributário da escola?</h2>
+    <div class="regimes">
+      <button class="regime-btn ativo" data-regime="simples" onclick="selecionar('simples')">
+        <div class="t">Simples Nacional</div>
+        <div class="d">Anexo III (ensino). IR, CSLL, PIS, COFINS, ISS e INSS patronal já no DAS.</div>
+      </button>
+      <button class="regime-btn" data-regime="presumido" onclick="selecionar('presumido')">
+        <div class="t">Lucro Presumido</div>
+        <div class="d">Presunção 32%. INSS patronal (~28,8%) incide sobre a folha.</div>
+      </button>
+      <button class="regime-btn" data-regime="real" onclick="selecionar('real')">
+        <div class="t">Lucro Real</div>
+        <div class="d">IR/CSLL sobre o lucro; PIS/COFINS não cumulativos.</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2) Dados</h2>
+    <div class="grid col2">
+      <div><label>Receita bruta mensal (R$)</label><input id="receita" type="number" value="200000" /></div>
+      <div><label>Folha bruta mensal (R$)</label><input id="folha" type="number" value="127602.94" /></div>
+      <div id="wrap-rbt12"><label>Receita bruta dos últimos 12 meses (R$) <span class="hint">— define a faixa do Simples</span></label><input id="rbt12" type="number" value="2400000" /></div>
+      <div id="wrap-iss" class="hidden"><label>Alíquota de ISS do município (%) <span class="hint">— normalmente 2% a 5%</span></label><input id="iss" type="number" value="5" step="0.1" /></div>
+      <div id="wrap-lucro" class="hidden"><label>Lucro mensal (R$) <span class="hint">— para IR/CSLL no Lucro Real</span></label><input id="lucro" type="number" value="20000" /></div>
+    </div>
+    <div style="margin-top:16px"><button class="kpi" style="cursor:pointer;border:none" onclick="calcular()">Calcular ▶</button></div>
+  </div>
+
+  <section id="resultado" class="hidden">
+    <div class="card">
+      <h2 id="res-titulo">Resultado</h2>
+      <div class="kpis" id="kpis"></div>
+      <h2 style="margin-top:22px">Detalhamento dos tributos sobre a receita (mês)</h2>
+      <table id="tab"><thead><tr><th>Tributo</th><th>Valor (R$)</th><th>% da receita</th></tr></thead><tbody></tbody>
+        <tfoot><tr><td>Total sobre a receita</td><td id="tot-v"></td><td id="tot-p"></td></tr></tfoot></table>
+      <div class="obs" id="obs"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+// ======== Espelho do motor engine/tributos.py (percentuais legais) ========
+const ANEXO_III = [ // [limite RBT12, aliquota nominal, parcela a deduzir]
+  [180000, 0.060, 0], [360000, 0.1120, 9360], [720000, 0.1350, 17640],
+  [1800000, 0.1600, 35640], [3600000, 0.2100, 125640], [4800000, 0.3300, 648000],
+];
+// Repartição do DAS: [IR, CSLL, COFINS, PIS, CPP(INSS), ISS]
+const REParticao = [
+  [0.04,0.035,0.1282,0.0278,0.434,0.335],[0.04,0.035,0.1405,0.0305,0.434,0.320],
+  [0.04,0.035,0.1364,0.0296,0.434,0.325],[0.04,0.035,0.1364,0.0296,0.434,0.325],
+  [0.04,0.035,0.1282,0.0278,0.434,0.335],[0.35,0.15,0.1603,0.0347,0.305,0.0],
+];
+let regime = 'simples';
+const BRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const PCT = v => (v*100).toFixed(2).replace('.',',')+'%';
+const num = id => parseFloat(document.getElementById(id).value)||0;
+
+function selecionar(r){
+  regime = r;
+  document.querySelectorAll('.regime-btn').forEach(b=>b.classList.toggle('ativo', b.dataset.regime===r));
+  document.getElementById('wrap-rbt12').classList.toggle('hidden', r!=='simples');
+  document.getElementById('wrap-iss').classList.toggle('hidden', r==='simples');
+  document.getElementById('wrap-lucro').classList.toggle('hidden', r!=='real');
+  if(!document.getElementById('resultado').classList.contains('hidden')) calcular();
+}
+
+function faixaSimples(rbt12){ for(let i=0;i<ANEXO_III.length;i++){ if(rbt12<=ANEXO_III[i][0]) return i; } return 5; }
+function efetivaSimples(rbt12){ if(rbt12<=0) return ANEXO_III[0][1]; const [,a,pd]=ANEXO_III[faixaSimples(rbt12)]; return Math.max(0,(rbt12*a-pd)/rbt12); }
+
+function calcular(){
+  const receita=num('receita'), folha=num('folha');
+  let linhas=[], total=0, inssPct=0, obs=[];
+
+  if(regime==='simples'){
+    const rbt12=num('rbt12'), ef=efetivaSimples(rbt12), das=receita*ef, f=faixaSimples(rbt12), rep=REParticao[f];
+    const nomes=['IRPJ','CSLL','COFINS','PIS','INSS patronal (CPP)','ISS'];
+    rep.forEach((frac,i)=>linhas.push([nomes[i], das*frac]));
+    total=das; inssPct=0;
+    obs.push(`<b>Simples Nacional — Anexo III, faixa ${f+1}.</b> Alíquota efetiva: <b>${PCT(ef)}</b>. Todos os tributos (incl. INSS patronal/CPP e ISS) já estão dentro do DAS — por isso o INSS patronal sobre a folha é <b>zero</b>.`);
+  } else if(regime==='presumido'){
+    const iss=num('iss')/100, base=receita*0.32;
+    const ir=base*0.15, adic=Math.max(0,base-20000)*0.10, csll=base*0.09, pis=receita*0.0065, cof=receita*0.03, issv=receita*iss;
+    linhas=[['IRPJ (15% + adic. 10%)',ir+adic],['CSLL (9%)',csll],['PIS (0,65%)',pis],['COFINS (3%)',cof],['ISS ('+(iss*100).toFixed(1)+'%)',issv]];
+    total=ir+adic+csll+pis+cof+issv; inssPct=0.288;
+    obs.push(`<b>Lucro Presumido.</b> Base presumida de 32% para serviços. <b>INSS patronal de 28,8%</b> (20% CPP + 3% RAT + 5,8% terceiros) incide sobre a folha.`);
+  } else {
+    const iss=num('iss')/100, lucro=num('lucro');
+    const ir=Math.max(0,lucro)*0.15, adic=Math.max(0,lucro-20000)*0.10, csll=Math.max(0,lucro)*0.09, pis=receita*0.0165, cof=receita*0.076, issv=receita*iss;
+    linhas=[['IRPJ (15% + adic. 10%)',ir+adic],['CSLL (9%)',csll],['PIS (1,65%)',pis],['COFINS (7,6%)',cof],['ISS ('+(iss*100).toFixed(1)+'%)',issv]];
+    total=ir+adic+csll+pis+cof+issv; inssPct=0.288;
+    obs.push(`<b>Lucro Real.</b> IR/CSLL sobre o lucro; PIS/COFINS não cumulativos (aqui sem créditos — aproximação). <b>INSS patronal de 28,8%</b> sobre a folha.`);
+  }
+
+  const inssVal=folha*inssPct;
+  const tbody=document.querySelector('#tab tbody'); tbody.innerHTML='';
+  linhas.forEach(([n,v])=>{ tbody.innerHTML+=`<tr><td>${n}</td><td>${BRL(v)}</td><td>${receita?PCT(v/receita):'-'}</td></tr>`; });
+  document.getElementById('tot-v').textContent=BRL(total);
+  document.getElementById('tot-p').textContent=receita?PCT(total/receita):'-';
+
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="v">${BRL(total)}</div><div class="l">Impostos sobre a receita (mês)</div></div>
+    <div class="kpi alt"><div class="v">${receita?PCT(total/receita):'-'}</div><div class="l">Carga efetiva sobre a receita</div></div>
+    <div class="kpi warn"><div class="v">${BRL(inssVal)}</div><div class="l">INSS patronal sobre a folha (${PCT(inssPct)})</div></div>
+    <div class="kpi"><div class="v">${BRL(total+inssVal)}</div><div class="l">Carga tributária total (mês)</div></div>`;
+  document.getElementById('obs').innerHTML=obs.join('<br>');
+  document.getElementById('res-titulo').textContent='Resultado — '+({simples:'Simples Nacional',presumido:'Lucro Presumido',real:'Lucro Real'}[regime]);
+  document.getElementById('resultado').classList.remove('hidden');
+}
+selecionar('simples');
+</script>
+</body>
+</html>

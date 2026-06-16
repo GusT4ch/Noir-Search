@@ -48,6 +48,7 @@ Navegador (escola/consultor)
 |---|----------------|--------|
 | 1 | **Receitas** (alunos, mensalidades, descontos, outras receitas) | ✅ pronto e validado |
 | 2 | **Folha de pagamento** (docentes/coordenação/admin, alocação por nível, encargos) | ✅ motor + testes prontos |
+| 2b | **Regime tributário** (Simples / Presumido / Real) com botão de escolha | ✅ motor + testes + tela do botão |
 | 3 | **Custos** diretos/indiretos + sistema de rateio | ⏳ próximo |
 | 4 | **DRE**, ponto de equilíbrio e **custo por aluno** | ⏳ |
 | 5 | **Saídas**: PDF (modelo do PowerPoint) e `.docx` editável | ⏳ |
@@ -55,9 +56,9 @@ Navegador (escola/consultor)
 
 ## Pontos a confirmar com o cliente
 
-- **Regime tributário** das escolas (Simples Nacional × Lucro Presumido/Real).
-  Isso muda a alíquota de **encargos** da folha (principalmente o INSS
-  patronal). Hoje o sistema usa alíquotas configuráveis com um padrão
-  conservador; basta ajustar por escola.
+- **Regime tributário** das escolas — ✅ resolvido: a própria escola escolhe
+  (Simples / Presumido / Real) e os cálculos se ajustam, inclusive o INSS
+  patronal da folha (zero no Simples, pois o CPP já está no DAS). A alíquota
+  de **ISS** (municipal, 2%–5%) e o **RAT** continuam ajustáveis por escola.
 - Critério de **rateio** dos custos administrativos e indiretos por nível
   (por nº de alunos, por receita, por área, etc.) — será definido no módulo 3.

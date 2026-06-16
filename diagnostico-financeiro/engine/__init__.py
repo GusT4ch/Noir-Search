@@ -12,6 +12,14 @@ from .folha import (
     FolhaInput,
     calcular_folha,
 )
+from .tributos import (
+    ParametrosTributarios,
+    TributosResultado,
+    aliquota_efetiva_simples,
+    calcular_tributos,
+    encargos_inss_para_regime,
+    inss_patronal_pct,
+)
 
 __all__ = [
     "SegmentoInput",
@@ -22,4 +30,10 @@ __all__ = [
     "Encargos",
     "FolhaInput",
     "calcular_folha",
+    "ParametrosTributarios",
+    "TributosResultado",
+    "aliquota_efetiva_simples",
+    "calcular_tributos",
+    "encargos_inss_para_regime",
+    "inss_patronal_pct",
 ]
