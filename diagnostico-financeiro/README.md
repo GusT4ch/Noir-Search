@@ -85,8 +85,10 @@ python -m unittest discover -s tests -v
   - **Lucro Presumido** — presunção de 32%; IRPJ 15% (+10% adicional),
     CSLL 9%, PIS 0,65%, COFINS 3%, ISS municipal; **INSS patronal ≈ 28,8%**
     sobre a folha.
-  - **Lucro Real** — IRPJ/CSLL sobre o lucro; PIS 1,65% e COFINS 7,6%; ISS;
-    INSS patronal sobre a folha.
+  - **Lucro Real** — IRPJ/CSLL sobre o lucro; PIS/COFINS no regime
+    **cumulativo (0,65% + 3% = 3,65%)**, pois os serviços de educação
+    permanecem no cumulativo mesmo no Lucro Real (Lei 10.833/2003, art. 10,
+    XIV); ISS; INSS patronal sobre a folha.
   - Endpoints: `POST /api/tributos`; e o `POST /api/folha` aceita o campo
     `regime`, que define automaticamente o INSS patronal da folha.
   - **Botão de regime** (interface): `web/Regime-Tributario.html` — página

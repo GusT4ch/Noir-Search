@@ -66,9 +66,10 @@ class TestReal(unittest.TestCase):
         d = r.detalhe
         self.assertAlmostEqual(d["ir"], 1500, delta=0.05)     # 15%*10k, sem adicional
         self.assertAlmostEqual(d["csll"], 900, delta=0.05)    # 9%*10k
-        self.assertAlmostEqual(d["pis"], 1650, delta=0.05)    # 1,65%*100k
-        self.assertAlmostEqual(d["cofins"], 7600, delta=0.05) # 7,6%*100k
-        self.assertAlmostEqual(r.total_sobre_receita, 16650, delta=0.1)
+        # Educação: PIS/COFINS cumulativos mesmo no Lucro Real (Lei 10.833/03)
+        self.assertAlmostEqual(d["pis"], 650, delta=0.05)     # 0,65%*100k
+        self.assertAlmostEqual(d["cofins"], 3000, delta=0.05) # 3%*100k
+        self.assertAlmostEqual(r.total_sobre_receita, 11050, delta=0.1)
         self.assertAlmostEqual(r.inss_patronal_pct, 0.288, places=4)
 
 

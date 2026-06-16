@@ -216,8 +216,10 @@ def calcular_tributos(
         irpj = max(0.0, lucro) * 0.15
         adicional = max(0.0, lucro - params.irpj_adicional_limite_mensal) * 0.10
         csll = max(0.0, lucro) * 0.09
-        pis = receita_mensal * 0.0165
-        cofins = receita_mensal * 0.076
+        # Serviços de educação permanecem no regime CUMULATIVO de PIS/COFINS
+        # mesmo no Lucro Real (Lei 10.833/2003, art. 10, XIV): 0,65% + 3%.
+        pis = receita_mensal * 0.0065
+        cofins = receita_mensal * 0.03
         iss = receita_mensal * params.iss_pct
         detalhe = {
             "ir": _r(irpj + adicional),
@@ -229,9 +231,10 @@ def calcular_tributos(
         }
         total = _r(irpj + adicional + csll + pis + cofins + iss)
         obs.append(
-            "Lucro Real: IRPJ 15% + adicional 10% e CSLL 9% sobre o lucro; "
-            "PIS 1,65% e COFINS 7,6% sobre a receita (sem considerar créditos "
-            "— aproximação de diagnóstico); ISS municipal."
+            "Lucro Real: IRPJ 15% + adicional 10% e CSLL 9% sobre o lucro. "
+            "PIS 0,65% e COFINS 3% (regime CUMULATIVO — serviços de educação "
+            "permanecem no cumulativo mesmo no Lucro Real, Lei 10.833/2003, "
+            "art. 10, XIV); ISS municipal."
         )
         obs.append(
             f"INSS patronal sobre a folha: {inss_pct * 100:.1f}%."

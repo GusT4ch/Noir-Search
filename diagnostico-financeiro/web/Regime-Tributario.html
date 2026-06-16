@@ -135,10 +135,11 @@ function calcular(){
     obs.push(`<b>Lucro Presumido.</b> Base presumida de 32% para serviços. <b>INSS patronal de 28,8%</b> (20% CPP + 3% RAT + 5,8% terceiros) incide sobre a folha.`);
   } else {
     const iss=num('iss')/100, lucro=num('lucro');
-    const ir=Math.max(0,lucro)*0.15, adic=Math.max(0,lucro-20000)*0.10, csll=Math.max(0,lucro)*0.09, pis=receita*0.0165, cof=receita*0.076, issv=receita*iss;
-    linhas=[['IRPJ (15% + adic. 10%)',ir+adic],['CSLL (9%)',csll],['PIS (1,65%)',pis],['COFINS (7,6%)',cof],['ISS ('+(iss*100).toFixed(1)+'%)',issv]];
+    // Educação permanece no PIS/COFINS cumulativo (3,65%) mesmo no Lucro Real (Lei 10.833/03, art. 10, XIV).
+    const ir=Math.max(0,lucro)*0.15, adic=Math.max(0,lucro-20000)*0.10, csll=Math.max(0,lucro)*0.09, pis=receita*0.0065, cof=receita*0.03, issv=receita*iss;
+    linhas=[['IRPJ (15% + adic. 10%)',ir+adic],['CSLL (9%)',csll],['PIS (0,65%)',pis],['COFINS (3%)',cof],['ISS ('+(iss*100).toFixed(1)+'%)',issv]];
     total=ir+adic+csll+pis+cof+issv; inssPct=0.288;
-    obs.push(`<b>Lucro Real.</b> IR/CSLL sobre o lucro; PIS/COFINS não cumulativos (aqui sem créditos — aproximação). <b>INSS patronal de 28,8%</b> sobre a folha.`);
+    obs.push(`<b>Lucro Real.</b> IR/CSLL sobre o lucro. PIS/COFINS no regime <b>cumulativo (0,65% + 3%)</b> — serviços de educação permanecem no cumulativo mesmo no Lucro Real (Lei 10.833/2003, art. 10, XIV). <b>INSS patronal de 28,8%</b> sobre a folha.`);
   }
 
   const inssVal=folha*inssPct;
