@@ -62,11 +62,28 @@ cd diagnostico-financeiro
 python -m unittest discover -s tests -v
 ```
 
+## Módulos prontos
+
+- **Receitas** (`engine/receitas.py`) — alunos, mensalidades, descontos, outras receitas.
+- **Folha de pagamento** (`engine/folha.py`) — docentes, coordenação e
+  administrativos, com **alocação por nível de ensino** e **encargos
+  configuráveis** (FGTS, 13º, férias + 1/3 e INSS patronal conforme o regime
+  tributário). Endpoint: `POST /api/folha`.
+
+> Observação sobre a folha: a planilha original distribui o pessoal em vários
+> blocos (registrados, sem registro, extra-curriculares). O módulo reproduz
+> exatamente os colaboradores informados; o arquivo de exemplo
+> (`data/escola_modelo_folha.json`) usa o quadro de pessoal registrado extraído
+> da planilha.
+
 ## Próximos passos (roadmap)
 
-1. **Receitas** — ✅ concluído (este módulo)
-2. **Folha de pagamento** — docentes/coordenação/administrativo, com alocação por nível
-3. **Custos diretos e indiretos** + sistema de rateio
+Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões
+de produto (acesso multi-escola, LGPD, hospedagem).
+
+1. **Receitas** — ✅ concluído
+2. **Folha de pagamento** — ✅ motor + testes
+3. **Custos diretos e indiretos** + sistema de rateio — ⏳ próximo
 4. **DRE, ponto de equilíbrio e custo por aluno**
-5. **Saídas**: PDF (modelo do PowerPoint), painel completo e documento `.docx` editável
-6. **Publicação**: link por escola e histórico
+5. **Saídas**: PDF (modelo do PowerPoint) e documento `.docx` editável
+6. **Publicação**: login, multi-escola e hospedagem segura

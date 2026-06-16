@@ -1,0 +1,249 @@
+{
+  "escola": "Escola Modelo (Ágora)",
+  "ano_referencia": 2025,
+  "niveis": [
+    "Ensino Infantil",
+    "Fundamental I",
+    "Fundamental II",
+    "Ensino Médio"
+  ],
+  "encargos": {
+    "fgts": 0.08,
+    "decimo_terceiro": 0.0833,
+    "ferias_um_terco": 0.0278,
+    "inss_patronal": 0.0,
+    "outros": 0.0
+  },
+  "colaboradores": [
+    {
+      "nome": "professor matemática",
+      "categoria": "docente",
+      "salario_base": 3227.04,
+      "alocacao": {
+        "Fundamental II": 1.0
+      }
+    },
+    {
+      "nome": "professor de história",
+      "categoria": "docente",
+      "salario_base": 4229.28,
+      "alocacao": {
+        "Fundamental I": 0.25,
+        "Ensino Médio": 0.75
+      }
+    },
+    {
+      "nome": "professor de musica",
+      "categoria": "docente",
+      "salario_base": 2000.0,
+      "alocacao": {
+        "Ensino Infantil": 1.0
+      }
+    },
+    {
+      "nome": "professora",
+      "categoria": "docente",
+      "salario_base": 5759.16,
+      "alocacao": {
+        "Fundamental II": 1.0
+      }
+    },
+    {
+      "nome": "professora de ensino",
+      "categoria": "docente",
+      "salario_base": 1000.0,
+      "alocacao": {
+        "Ensino Infantil": 1.0
+      }
+    },
+    {
+      "nome": "professora",
+      "categoria": "docente",
+      "salario_base": 5759.16,
+      "alocacao": {
+        "Fundamental I": 1.0
+      }
+    },
+    {
+      "nome": "professor de espanhol",
+      "categoria": "docente",
+      "salario_base": 4302.72,
+      "alocacao": {
+        "Fundamental II": 0.5,
+        "Ensino Médio": 0.5
+      }
+    },
+    {
+      "nome": "professora",
+      "categoria": "docente",
+      "salario_base": 5759.16,
+      "alocacao": {
+        "Fundamental I": 0.5,
+        "Fundamental II": 0.5
+      }
+    },
+    {
+      "nome": "professora",
+      "categoria": "docente",
+      "salario_base": 3000.0,
+      "alocacao": {
+        "Ensino Infantil": 1.0
+      }
+    },
+    {
+      "nome": "professora de biologia",
+      "categoria": "docente",
+      "salario_base": 3547.8,
+      "alocacao": {
+        "Ensino Médio": 1.0
+      }
+    },
+    {
+      "nome": "professora",
+      "categoria": "docente",
+      "salario_base": 4124.34,
+      "alocacao": {
+        "Fundamental I": 0.3,
+        "Fundamental II": 0.7
+      }
+    },
+    {
+      "nome": "professora 2º série",
+      "categoria": "docente",
+      "salario_base": 5759.16,
+      "alocacao": {
+        "Fundamental I": 1.0
+      }
+    },
+    {
+      "nome": "professor de matemática",
+      "categoria": "docente",
+      "salario_base": 7491.96,
+      "alocacao": {
+        "Fundamental I": 0.5,
+        "Fundamental II": 0.25,
+        "Ensino Médio": 0.25
+      }
+    },
+    {
+      "nome": "professora des geométrico",
+      "categoria": "docente",
+      "salario_base": 4302.72,
+      "alocacao": {
+        "Ensino Médio": 1.0
+      }
+    },
+    {
+      "nome": "Diretor Pedagógico",
+      "categoria": "coordenacao",
+      "salario_base": 7233.21,
+      "alocacao": {
+        "Ensino Médio": 1.0
+      }
+    },
+    {
+      "nome": "Coordenador Fund 1",
+      "categoria": "coordenacao",
+      "salario_base": 1648.77,
+      "alocacao": {
+        "Ensino Infantil": 0.25,
+        "Fundamental I": 0.25,
+        "Fundamental II": 0.25,
+        "Ensino Médio": 0.25
+      }
+    },
+    {
+      "nome": "inspetor",
+      "categoria": "coordenacao",
+      "salario_base": 1295.22,
+      "alocacao": {
+        "Ensino Infantil": 0.25,
+        "Fundamental I": 0.25,
+        "Fundamental II": 0.25,
+        "Ensino Médio": 0.25
+      }
+    },
+    {
+      "nome": "Coordenador Geral",
+      "categoria": "coordenacao",
+      "salario_base": 6604.47,
+      "alocacao": {
+        "Ensino Infantil": 0.25,
+        "Fundamental I": 0.25,
+        "Fundamental II": 0.25,
+        "Ensino Médio": 0.25
+      }
+    },
+    {
+      "nome": "inspetor",
+      "categoria": "coordenacao",
+      "salario_base": 1961.94,
+      "alocacao": {
+        "Ensino Infantil": 0.25,
+        "Fundamental I": 0.25,
+        "Fundamental II": 0.25,
+        "Ensino Médio": 0.25
+      }
+    },
+    {
+      "nome": "vigia",
+      "categoria": "administrativo",
+      "salario_base": 2305.41,
+      "alocacao": {}
+    },
+    {
+      "nome": "zelador",
+      "categoria": "administrativo",
+      "salario_base": 3576.54,
+      "alocacao": {}
+    },
+    {
+      "nome": "administrativo 75",
+      "categoria": "administrativo",
+      "salario_base": 2669.0,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar de limpeza",
+      "categoria": "administrativo",
+      "salario_base": 1295.31,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar administrativa",
+      "categoria": "administrativo",
+      "salario_base": 1836.0,
+      "alocacao": {}
+    },
+    {
+      "nome": "vigia",
+      "categoria": "administrativo",
+      "salario_base": 2305.41,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar de limpeza",
+      "categoria": "administrativo",
+      "salario_base": 1295.22,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar de almoxa.",
+      "categoria": "administrativo",
+      "salario_base": 1295.22,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar de limpeza",
+      "categoria": "administrativo",
+      "salario_base": 1648.77,
+      "alocacao": {}
+    },
+    {
+      "nome": "auxiliar de limpeza",
+      "categoria": "administrativo",
+      "salario_base": 1539.24,
+      "alocacao": {}
+    }
+  ]
+}

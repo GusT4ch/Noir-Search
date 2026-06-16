@@ -23,9 +23,13 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from engine import (
+    Colaborador,
+    Encargos,
+    FolhaInput,
     OutraReceita,
     ReceitasInput,
     SegmentoInput,
+    calcular_folha,
     calcular_receitas,
 )
 
@@ -78,6 +82,41 @@ def analisar_receitas(payload: ReceitasPayload) -> dict:
         ],
     )
     return calcular_receitas(dados).as_dict()
+
+
+class ColaboradorPayload(BaseModel):
+    nome: str
+    categoria: str
+    salario_base: float = Field(ge=0)
+    alocacao: dict[str, float] = {}
+
+
+class EncargosPayload(BaseModel):
+    fgts: float = 0.08
+    decimo_terceiro: float = 0.0833
+    ferias_um_terco: float = 0.0278
+    inss_patronal: float = 0.0
+    outros: float = 0.0
+
+
+class FolhaPayload(BaseModel):
+    escola: str
+    ano_referencia: int
+    niveis: List[str]
+    colaboradores: List[ColaboradorPayload]
+    encargos: EncargosPayload = EncargosPayload()
+
+
+@app.post("/api/folha")
+def analisar_folha(payload: FolhaPayload) -> dict:
+    dados = FolhaInput(
+        escola=payload.escola,
+        ano_referencia=payload.ano_referencia,
+        niveis=payload.niveis,
+        colaboradores=[Colaborador(**c.model_dump()) for c in payload.colaboradores],
+        encargos=Encargos(**payload.encargos.model_dump()),
+    )
+    return calcular_folha(dados).as_dict()
 
 
 @app.get("/api/health")
