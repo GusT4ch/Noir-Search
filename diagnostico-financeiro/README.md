@@ -85,9 +85,10 @@ python -m unittest discover -s tests -v
   2. **Coordenação e Supervisão de Ensino** — coordenadores pedagógicos e
      supervisores de ensino (também alocados por nível).
   3. **Administrativo** — todas as pessoas que **não** são professores/
-     auxiliares nem coordenadores/supervisores de ensino: diretores,
-     secretaria, limpeza, segurança/portaria, zeladoria, almoxarifado,
-     recepção, etc. Não é alocado por nível — é rateado no módulo de Custos.
+     auxiliares nem coordenadores/supervisores de ensino: diretores (inclusive
+     o pedagógico), secretaria, limpeza, segurança/portaria, zeladoria,
+     almoxarifado, recepção, etc. Não é alocado por nível — é rateado no
+     módulo de Custos.
 
 - **Regime tributário** (`engine/tributos.py`) — a escola escolhe o regime e
   todos os cálculos passam a respeitar essa escolha:

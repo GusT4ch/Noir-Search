@@ -58,11 +58,12 @@ CATEGORIAS_INFO = {
         "label": "Administrativo (demais funcionários)",
         "descricao": (
             "Todas as pessoas que NÃO são professores/auxiliares nem "
-            "coordenadores/supervisores de ensino. Não é alocado por nível — "
-            "é rateado entre os níveis no cálculo dos custos."
+            "coordenadores/supervisores de ensino. Inclui TODOS os diretores "
+            "(inclusive o diretor pedagógico). Não é alocado por nível — é "
+            "rateado entre os níveis no cálculo dos custos."
         ),
         "exemplos": [
-            "diretores",
+            "diretores (inclusive pedagógico)",
             "secretaria",
             "limpeza",
             "segurança / portaria",

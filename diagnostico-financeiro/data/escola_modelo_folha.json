@@ -135,11 +135,9 @@
     },
     {
       "nome": "Diretor Pedagógico",
-      "categoria": "coordenacao",
+      "categoria": "administrativo",
       "salario_base": 7233.21,
-      "alocacao": {
-        "Ensino Médio": 1.0
-      }
+      "alocacao": {}
     },
     {
       "nome": "Coordenador Fund 1",
