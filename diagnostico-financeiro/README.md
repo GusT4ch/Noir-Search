@@ -76,6 +76,19 @@ python -m unittest discover -s tests -v
 > (`data/escola_modelo_folha.json`) usa o quadro de pessoal registrado extraído
 > da planilha.
 
+  **Como a escola classifica cada funcionário** (critério: a *função* da
+  pessoa) — definições em `engine/folha.py` (`CATEGORIAS_INFO`), expostas em
+  `GET /api/folha/categorias` e mostradas na tela `web/Diagnostico-Folha.html`:
+
+  1. **Professores e Auxiliares** — professores e auxiliares de sala do
+     Infantil, Fundamental e Médio (alocados por nível, em %).
+  2. **Coordenação e Supervisão de Ensino** — coordenadores pedagógicos e
+     supervisores de ensino (também alocados por nível).
+  3. **Administrativo** — todas as pessoas que **não** são professores/
+     auxiliares nem coordenadores/supervisores de ensino: diretores,
+     secretaria, limpeza, segurança/portaria, zeladoria, almoxarifado,
+     recepção, etc. Não é alocado por nível — é rateado no módulo de Custos.
+
 - **Regime tributário** (`engine/tributos.py`) — a escola escolhe o regime e
   todos os cálculos passam a respeitar essa escolha:
   - **Simples Nacional (Anexo III, ensino)** — alíquota efetiva sobre a

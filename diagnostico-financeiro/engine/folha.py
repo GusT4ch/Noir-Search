@@ -27,6 +27,53 @@ from typing import Dict, List
 
 CATEGORIAS = ("docente", "coordenacao", "administrativo")
 
+# Definições das categorias da folha — fonte única usada pela interface para
+# orientar a escola no preenchimento. O critério é a FUNÇÃO da pessoa:
+#
+#   * docente        -> professores e auxiliares (Infantil, Fundamental, Médio)
+#   * coordenacao    -> coordenadores e supervisores de ENSINO
+#   * administrativo -> TODO o restante (quem não é professor/auxiliar nem
+#                       coordenador/supervisor de ensino)
+CATEGORIAS_INFO = {
+    "docente": {
+        "label": "Professores e Auxiliares",
+        "descricao": (
+            "Professores e auxiliares de sala do Ensino Infantil, Fundamental "
+            "e Médio. Informe o salário e a alocação por nível de ensino "
+            "(quando o profissional atua em mais de um nível, distribua em %)."
+        ),
+        "exemplos": ["professores", "auxiliares de sala / de classe"],
+        "aloca_por_nivel": True,
+    },
+    "coordenacao": {
+        "label": "Coordenação e Supervisão de Ensino",
+        "descricao": (
+            "Coordenadores pedagógicos e supervisores de ensino. Também podem "
+            "ser alocados por nível de ensino."
+        ),
+        "exemplos": ["coordenador pedagógico", "supervisor de ensino"],
+        "aloca_por_nivel": True,
+    },
+    "administrativo": {
+        "label": "Administrativo (demais funcionários)",
+        "descricao": (
+            "Todas as pessoas que NÃO são professores/auxiliares nem "
+            "coordenadores/supervisores de ensino. Não é alocado por nível — "
+            "é rateado entre os níveis no cálculo dos custos."
+        ),
+        "exemplos": [
+            "diretores",
+            "secretaria",
+            "limpeza",
+            "segurança / portaria",
+            "zeladoria",
+            "almoxarifado",
+            "recepção",
+        ],
+        "aloca_por_nivel": False,
+    },
+}
+
 
 def _r(v: float) -> float:
     return round(v + 1e-9, 2)

@@ -23,6 +23,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from engine import (
+    CATEGORIAS_INFO,
     Colaborador,
     DREInput,
     Encargos,
@@ -124,6 +125,12 @@ class FolhaPayload(BaseModel):
     encargos: EncargosPayload = EncargosPayload()
     # Se informado, o regime define automaticamente o INSS patronal da folha.
     regime: RegimePayload | None = None
+
+
+@app.get("/api/folha/categorias")
+def folha_categorias() -> dict:
+    """Definições das categorias da folha — orientação para o preenchimento."""
+    return CATEGORIAS_INFO
 
 
 @app.post("/api/folha")

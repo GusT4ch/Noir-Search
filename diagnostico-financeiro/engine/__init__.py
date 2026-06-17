@@ -7,6 +7,8 @@ from .receitas import (
     calcular_receitas,
 )
 from .folha import (
+    CATEGORIAS,
+    CATEGORIAS_INFO,
     Colaborador,
     Encargos,
     FolhaInput,
@@ -32,6 +34,8 @@ __all__ = [
     "OutraReceita",
     "ReceitasInput",
     "calcular_receitas",
+    "CATEGORIAS",
+    "CATEGORIAS_INFO",
     "Colaborador",
     "Encargos",
     "FolhaInput",
