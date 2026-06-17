@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico Financeiro — Análise SWOT</title>
+<style>
+  :root{--azul:#1f3a5f;--azul2:#2e5c8a;--verde:#2e8b57;--cinza:#f4f6f9;--linha:#e1e6ee;--texto:#23303f;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--texto);background:var(--cinza)}
+  header{background:var(--azul);color:#fff;padding:22px 28px}
+  header h1{margin:0;font-size:20px} header p{margin:4px 0 0;opacity:.85;font-size:14px}
+  main{max-width:1180px;margin:0 auto;padding:24px}
+  .layout{display:grid;grid-template-columns:1fr 1.05fr;gap:20px;align-items:start}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:18px;margin-bottom:20px}
+  .card h2{margin:0 0 6px;font-size:15px;color:var(--azul)}
+  .grp{margin-bottom:14px}
+  .grp h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.4px}
+  .grp.f h3{color:#2e8b57} .grp.w h3{color:#b23b3b} .grp.o h3{color:#2e5c8a} .grp.a h3{color:#b06a1f}
+  .fator{display:grid;grid-template-columns:1fr 130px 38px;gap:8px;align-items:center;margin-bottom:6px}
+  .fator .nome{font-size:13px}
+  .fator input[type=range]{width:100%}
+  .fator .val{font-size:13px;font-weight:700;text-align:right}
+  .mini{font-size:11px;color:#8a94a2}
+  /* matriz */
+  .matriz-wrap{position:sticky;top:16px}
+  .scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .sc{border-radius:8px;padding:8px;text-align:center;color:#fff}
+  .sc .v{font-size:18px;font-weight:700}.sc .l{font-size:11px;opacity:.9}
+  .sc.f{background:#2e8b57}.sc.w{background:#b23b3b}.sc.o{background:#2e5c8a}.sc.a{background:#b06a1f}
+  .quad{margin-top:14px;border-radius:10px;padding:14px;background:#f0f4fa;border:1px solid var(--linha)}
+  .quad .post{font-size:17px;font-weight:800;color:var(--azul)}
+  .quad .rec{font-size:13.5px;margin-top:6px;color:#3a4756}
+  .pos{font-size:12px;color:#5b6675;margin-top:6px}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}.matriz-wrap{position:static}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Diagnóstico Econômico/Financeiro — Análise SWOT Interativa</h1>
+  <p>Ajuste as notas (0 a 10) de cada fator. A bolinha se move para o quadrante estratégico em tempo real.</p>
+</header>
+
+<main>
+  <div class="layout">
+    <!-- PARÂMETROS -->
+    <div>
+      <div class="card">
+        <h2>Parâmetros</h2>
+        <p class="mini">Nota 0 = irrelevante/ausente · 10 = muito forte/intenso. Os fatores positivos (Forças, Oportunidades) empurram a bolinha para cima/direita; os negativos (Fraquezas, Ameaças), para baixo/esquerda.</p>
+        <div class="grp f" data-cat="forca"><h3>Forças (interno +)</h3><div class="lista"></div></div>
+        <div class="grp w" data-cat="fraqueza"><h3>Fraquezas (interno −)</h3><div class="lista"></div></div>
+        <div class="grp o" data-cat="oportunidade"><h3>Oportunidades (externo +)</h3><div class="lista"></div></div>
+        <div class="grp a" data-cat="ameaca"><h3>Ameaças (externo −)</h3><div class="lista"></div></div>
+      </div>
+    </div>
+
+    <!-- MATRIZ -->
+    <div class="matriz-wrap">
+      <div class="card">
+        <h2>Posição estratégica</h2>
+        <div class="scores">
+          <div class="sc f"><div class="v" id="sc-f">0</div><div class="l">Forças</div></div>
+          <div class="sc w"><div class="v" id="sc-w">0</div><div class="l">Fraquezas</div></div>
+          <div class="sc o"><div class="v" id="sc-o">0</div><div class="l">Oportunid.</div></div>
+          <div class="sc a"><div class="v" id="sc-a">0</div><div class="l">Ameaças</div></div>
+        </div>
+        <svg id="matriz" viewBox="0 0 400 400" width="100%" style="max-width:440px;display:block;margin:0 auto"></svg>
+        <div class="quad">
+          <div class="post" id="postura">—</div>
+          <div class="rec" id="recom">—</div>
+          <div class="pos" id="coord">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// Fatores padrão (extraídos da SWOT da planilha). nota 0..10, peso relativo.
+const FATORES = [
+  ["forca","Receita líquida sólida",8,3],
+  ["forca","Margem de contribuição saudável",7,3],
+  ["forca","Crescimento nos últimos 10 anos",8,2],
+  ["forca","Base de alunos matriculados",7,2],
+  ["forca","Aluguel baixo vs. receita",7,1],
+  ["fraqueza","Resultado/lucro baixo",7,3],
+  ["fraqueza","Carga tributária elevada",6,2],
+  ["fraqueza","Inadimplência",6,2],
+  ["fraqueza","Evasão escolar",5,2],
+  ["fraqueza","Ausência de relatórios/orçamento",7,2],
+  ["fraqueza","Resultado negativo no Infantil",6,2],
+  ["oportunidade","Planejamento tributário",8,3],
+  ["oportunidade","Otimização da folha",7,2],
+  ["oportunidade","Marketing e captação",6,2],
+  ["oportunidade","Crescimento pós retenção",6,2],
+  ["oportunidade","Recuperação financeira",7,2],
+  ["ameaca","Passivo tributário",5,2],
+  ["ameaca","Passivo oneroso (dívidas)",6,2],
+  ["ameaca","Passivo trabalhista",4,1],
+  ["ameaca","Competitividade do mercado",5,2],
+  ["ameaca","Necessidade de reinvestimentos",5,1],
+];
+const state = FATORES.map(([cat,nome,nota,peso])=>({cat,nome,nota,peso}));
+
+// monta os sliders
+document.querySelectorAll('.grp').forEach(grp=>{
+  const cat=grp.dataset.cat, lista=grp.querySelector('.lista');
+  state.forEach((f,idx)=>{
+    if(f.cat!==cat) return;
+    const div=document.createElement('div'); div.className='fator';
+    div.innerHTML=`<div class="nome">${f.nome}</div>
+      <input type="range" min="0" max="10" step="1" value="${f.nota}" data-i="${idx}">
+      <div class="val" id="v${idx}">${f.nota}</div>`;
+    lista.appendChild(div);
+  });
+});
+document.querySelectorAll('input[type=range]').forEach(r=>{
+  r.addEventListener('input',e=>{
+    const i=+e.target.dataset.i; state[i].nota=+e.target.value;
+    document.getElementById('v'+i).textContent=e.target.value;
+    render();
+  });
+});
+
+function media(cat){
+  const it=state.filter(f=>f.cat===cat);
+  const pw=it.reduce((s,f)=>s+f.peso,0);
+  return pw? it.reduce((s,f)=>s+f.nota*f.peso,0)/pw : 0;
+}
+
+const QUAD = {
+  ofensiva:["Ofensiva / Crescimento","Ambiente favorável: use as forças para aproveitar as oportunidades. Momento de investir e crescer."],
+  reorientacao:["Reorientação / Crescimento","Há boas oportunidades, mas fraquezas internas atrapalham. Corrija as fraquezas para capturar as oportunidades."],
+  defensiva:["Defensiva / Manutenção","A escola é forte, mas o ambiente traz ameaças. Use as forças para se proteger e manter a posição."],
+  sobrevivencia:["Sobrevivência","Atenção: fraquezas internas somadas a ameaças externas. Reduza riscos, corte o não essencial e reforce o caixa."],
+};
+function classificar(x,y){
+  if(x>=0&&y>=0) return "ofensiva";
+  if(x<0&&y>=0) return "reorientacao";
+  if(x>=0&&y<0) return "defensiva";
+  return "sobrevivencia";
+}
+
+function desenharGrade(){
+  const S=400,c=S/2,colors={ofensiva:"#e8f5ee",reorientacao:"#eaf0f8",defensiva:"#fdf3e7",sobrevivencia:"#fbecec"};
+  return `
+   <rect x="${c}" y="0" width="${c}" height="${c}" fill="${colors.ofensiva}"/>
+   <rect x="0" y="0" width="${c}" height="${c}" fill="${colors.reorientacao}"/>
+   <rect x="${c}" y="${c}" width="${c}" height="${c}" fill="${colors.defensiva}"/>
+   <rect x="0" y="${c}" width="${c}" height="${c}" fill="${colors.sobrevivencia}"/>
+   <line x1="${c}" y1="0" x2="${c}" y2="${S}" stroke="#c4cedb"/>
+   <line x1="0" y1="${c}" x2="${S}" y2="${c}" stroke="#c4cedb"/>
+   <text x="${c+90}" y="20" font-size="11" fill="#2e8b57" text-anchor="middle">OFENSIVA</text>
+   <text x="${c-90}" y="20" font-size="11" fill="#2e5c8a" text-anchor="middle">REORIENTAÇÃO</text>
+   <text x="${c+90}" y="${S-8}" font-size="11" fill="#b06a1f" text-anchor="middle">DEFENSIVA</text>
+   <text x="${c-90}" y="${S-8}" font-size="11" fill="#b23b3b" text-anchor="middle">SOBREVIVÊNCIA</text>
+   <text x="${S-6}" y="${c-6}" font-size="10" fill="#7a8696" text-anchor="end">Forças →</text>
+   <text x="6" y="${c-6}" font-size="10" fill="#7a8696">← Fraquezas</text>
+   <text x="${c+6}" y="14" font-size="10" fill="#7a8696">↑ Oportunidades</text>
+   <text x="${c+6}" y="${S-18}" font-size="10" fill="#7a8696">↓ Ameaças</text>`;
+}
+
+function render(){
+  const F=media("forca"),W=media("fraqueza"),O=media("oportunidade"),A=media("ameaca");
+  const x=F-W, y=O-A;  // -10..10
+  document.getElementById('sc-f').textContent=F.toFixed(1);
+  document.getElementById('sc-w').textContent=W.toFixed(1);
+  document.getElementById('sc-o').textContent=O.toFixed(1);
+  document.getElementById('sc-a').textContent=A.toFixed(1);
+
+  const S=400,c=S/2,esc=c/10; // 10 unidades = meio gráfico
+  const px=c + x*esc, py=c - y*esc; // y invertido (SVG cresce p/ baixo)
+  const q=classificar(x,y);
+  const svg=document.getElementById('matriz');
+  svg.innerHTML = desenharGrade() + `
+    <line x1="${c}" y1="${c}" x2="${px}" y2="${py}" stroke="#1f3a5f" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <circle cx="${px}" cy="${py}" r="11" fill="#1f3a5f" stroke="#fff" stroke-width="3">
+      <animate attributeName="r" values="11;13;11" dur="1.4s" repeatCount="indefinite"/>
+    </circle>`;
+  const [post,rec]=QUAD[q];
+  document.getElementById('postura').textContent=post;
+  document.getElementById('recom').textContent=rec;
+  document.getElementById('coord').textContent=
+    `Eixo interno (Forças−Fraquezas): ${x.toFixed(1)}  ·  Eixo externo (Oportunidades−Ameaças): ${y.toFixed(1)}`;
+}
+render();
+</script>
+</body>
+</html>

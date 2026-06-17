@@ -1,0 +1,30 @@
+{
+  "escola": "Escola Modelo (Ágora)",
+  "ano": 2025,
+  "fatores": [
+    {"nome": "Receita líquida sólida", "categoria": "forca", "nota": 8, "peso": 3},
+    {"nome": "Margem de contribuição saudável (≈50%)", "categoria": "forca", "nota": 7, "peso": 3},
+    {"nome": "Crescimento nos últimos 10 anos", "categoria": "forca", "nota": 8, "peso": 2},
+    {"nome": "Base de alunos matriculados", "categoria": "forca", "nota": 7, "peso": 2},
+    {"nome": "Aluguel baixo em relação à receita", "categoria": "forca", "nota": 7, "peso": 1},
+
+    {"nome": "Resultado/lucro baixo", "categoria": "fraqueza", "nota": 7, "peso": 3},
+    {"nome": "Carga tributária elevada", "categoria": "fraqueza", "nota": 6, "peso": 2},
+    {"nome": "Inadimplência", "categoria": "fraqueza", "nota": 6, "peso": 2},
+    {"nome": "Evasão escolar", "categoria": "fraqueza", "nota": 5, "peso": 2},
+    {"nome": "Ausência de relatórios/projeções/orçamento", "categoria": "fraqueza", "nota": 7, "peso": 2},
+    {"nome": "Resultado negativo na Educação Infantil", "categoria": "fraqueza", "nota": 6, "peso": 2},
+
+    {"nome": "Planejamento tributário", "categoria": "oportunidade", "nota": 8, "peso": 3},
+    {"nome": "Otimização da folha de pagamento", "categoria": "oportunidade", "nota": 7, "peso": 2},
+    {"nome": "Marketing e captação", "categoria": "oportunidade", "nota": 6, "peso": 2},
+    {"nome": "Crescimento pós retenção de alunos", "categoria": "oportunidade", "nota": 6, "peso": 2},
+    {"nome": "Condições de recuperação financeira", "categoria": "oportunidade", "nota": 7, "peso": 2},
+
+    {"nome": "Passivo tributário", "categoria": "ameaca", "nota": 5, "peso": 2},
+    {"nome": "Passivo oneroso (dívidas)", "categoria": "ameaca", "nota": 6, "peso": 2},
+    {"nome": "Passivo trabalhista", "categoria": "ameaca", "nota": 4, "peso": 1},
+    {"nome": "Competitividade do mercado", "categoria": "ameaca", "nota": 5, "peso": 2},
+    {"nome": "Necessidade de reinvestimentos", "categoria": "ameaca", "nota": 5, "peso": 1}
+  ]
+}

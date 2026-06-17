@@ -51,6 +51,7 @@ Navegador (escola/consultor)
 | 2b | **Regime tributário** (Simples / Presumido / Real) com botão de escolha | ✅ motor + testes + tela do botão |
 | 3 | **Custos** diretos/indiretos + sistema de rateio | ✅ motor + testes (reproduz o DRE da planilha) |
 | 4 | **DRE**, ponto de equilíbrio e **custo por aluno** | ✅ incluído no módulo de Custos/DRE |
+| 4b | **Análise SWOT interativa** (bolinha que se move pelos quadrantes) | ✅ motor + testes + tela interativa |
 | 5 | **Saídas**: PDF (modelo do PowerPoint) e `.docx` editável | ⏳ próximo |
 | 6 | **Publicação**: login, banco de dados, multi-escola, hospedagem segura | ⏳ |
 

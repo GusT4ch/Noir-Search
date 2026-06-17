@@ -28,6 +28,13 @@ from .dre import (
     LinhaCusto,
     calcular_dre,
 )
+from .swot import (
+    CATEGORIAS_SWOT_INFO,
+    FatorSWOT,
+    SWOTInput,
+    SWOTResultado,
+    calcular_swot,
+)
 
 __all__ = [
     "SegmentoInput",
@@ -50,4 +57,9 @@ __all__ = [
     "DREResultado",
     "LinhaCusto",
     "calcular_dre",
+    "CATEGORIAS_SWOT_INFO",
+    "FatorSWOT",
+    "SWOTInput",
+    "SWOTResultado",
+    "calcular_swot",
 ]

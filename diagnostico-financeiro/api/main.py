@@ -27,8 +27,11 @@ from engine import (
     Colaborador,
     DREInput,
     Encargos,
+    FatorSWOT,
     FolhaInput,
     LinhaCusto,
+    SWOTInput,
+    calcular_swot,
     OutraReceita,
     ParametrosTributarios,
     ReceitasInput,
@@ -206,6 +209,29 @@ def analisar_dre(payload: DREPayload) -> dict:
         csll=payload.csll,
     )
     return calcular_dre(dados).as_dict()
+
+
+class FatorSWOTPayload(BaseModel):
+    nome: str
+    categoria: str            # forca | fraqueza | oportunidade | ameaca
+    nota: float = Field(default=5.0, ge=0, le=10)
+    peso: float = Field(default=1.0, ge=0)
+
+
+class SWOTPayload(BaseModel):
+    escola: str
+    ano: int
+    fatores: List[FatorSWOTPayload]
+
+
+@app.post("/api/swot")
+def analisar_swot(payload: SWOTPayload) -> dict:
+    dados = SWOTInput(
+        escola=payload.escola,
+        ano=payload.ano,
+        fatores=[FatorSWOT(**f.model_dump()) for f in payload.fatores],
+    )
+    return calcular_swot(dados).as_dict()
 
 
 @app.get("/api/health")

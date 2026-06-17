@@ -119,6 +119,17 @@ python -m unittest discover -s tests -v
     R$ 34.731,94 → Lucro R$ 27.095,49).
   - Endpoint: `POST /api/dre`.
 
+- **Análise SWOT interativa** (`engine/swot.py`) — matriz estratégica
+  quantitativa. Cada fator recebe nota (0–10) e peso; o motor calcula a média
+  de cada grupo e posiciona a "bolinha":
+  - Eixo X (ambiente interno) = Forças − Fraquezas
+  - Eixo Y (ambiente externo) = Oportunidades − Ameaças
+  - Quadrantes: **Ofensiva** (forças+oportunidades), **Reorientação**
+    (fraquezas+oportunidades), **Defensiva** (forças+ameaças) e
+    **Sobrevivência** (fraquezas+ameaças), cada um com sua recomendação.
+  - Endpoint: `POST /api/swot`. Tela: `web/Analise-SWOT.html` — a bolinha se
+    move em tempo real conforme a escola ajusta as notas.
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões
