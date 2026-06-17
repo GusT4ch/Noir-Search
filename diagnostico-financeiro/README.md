@@ -94,6 +94,17 @@ python -m unittest discover -s tests -v
   - **Botão de regime** (interface): `web/Regime-Tributario.html` — página
     autônoma onde a escola clica no regime e vê o impacto na hora.
 
+- **Custos + DRE** (`engine/dre.py`) — monta a cascata do Demonstrativo de
+  Resultado (Receita Líquida → Custos Diretos → Margem de Contribuição →
+  Custos Indiretos → EBITDA → EBIT → Lucro Operacional), com:
+  - **indicadores**: margens (contribuição, EBITDA, líquida) e **ponto de
+    equilíbrio** (break-even, separando custos fixos e variáveis);
+  - **rateio por nível de ensino** (direcionador: participação de cada nível
+    na receita líquida) e **custo por aluno** (mensal e anual);
+  - reproduz exatamente o DRE da planilha (Margem R$ 418.729,23 → EBITDA
+    R$ 34.731,94 → Lucro R$ 27.095,49).
+  - Endpoint: `POST /api/dre`.
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões

@@ -24,12 +24,15 @@ from pydantic import BaseModel, Field
 
 from engine import (
     Colaborador,
+    DREInput,
     Encargos,
     FolhaInput,
+    LinhaCusto,
     OutraReceita,
     ParametrosTributarios,
     ReceitasInput,
     SegmentoInput,
+    calcular_dre,
     calcular_folha,
     calcular_receitas,
     calcular_tributos,
@@ -155,6 +158,47 @@ def analisar_tributos(payload: TributosPayload) -> dict:
         params=params,
         lucro_mensal=payload.lucro_mensal,
     ).as_dict()
+
+
+class LinhaCustoPayload(BaseModel):
+    nome: str
+    valor: float = Field(ge=0)
+    classe: str                               # "direto" | "indireto"
+    grupo: str = ""
+    variavel: bool = False
+    por_nivel: dict[str, float] | None = None
+
+
+class DREPayload(BaseModel):
+    escola: str
+    ano: int
+    niveis: List[str]
+    receita_liquida_total: float = Field(ge=0)
+    receita_por_nivel: dict[str, float]
+    alunos_por_nivel: dict[str, int]
+    custos: List[LinhaCustoPayload]
+    depreciacao: float = 0.0
+    juros: float = 0.0
+    irpj: float = 0.0
+    csll: float = 0.0
+
+
+@app.post("/api/dre")
+def analisar_dre(payload: DREPayload) -> dict:
+    dados = DREInput(
+        escola=payload.escola,
+        ano=payload.ano,
+        niveis=payload.niveis,
+        receita_liquida_total=payload.receita_liquida_total,
+        receita_por_nivel=payload.receita_por_nivel,
+        alunos_por_nivel=payload.alunos_por_nivel,
+        custos=[LinhaCusto(**c.model_dump()) for c in payload.custos],
+        depreciacao=payload.depreciacao,
+        juros=payload.juros,
+        irpj=payload.irpj,
+        csll=payload.csll,
+    )
+    return calcular_dre(dados).as_dict()
 
 
 @app.get("/api/health")

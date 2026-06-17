@@ -49,9 +49,9 @@ Navegador (escola/consultor)
 | 1 | **Receitas** (alunos, mensalidades, descontos, outras receitas) | ✅ pronto e validado |
 | 2 | **Folha de pagamento** (docentes/coordenação/admin, alocação por nível, encargos) | ✅ motor + testes prontos |
 | 2b | **Regime tributário** (Simples / Presumido / Real) com botão de escolha | ✅ motor + testes + tela do botão |
-| 3 | **Custos** diretos/indiretos + sistema de rateio | ⏳ próximo |
-| 4 | **DRE**, ponto de equilíbrio e **custo por aluno** | ⏳ |
-| 5 | **Saídas**: PDF (modelo do PowerPoint) e `.docx` editável | ⏳ |
+| 3 | **Custos** diretos/indiretos + sistema de rateio | ✅ motor + testes (reproduz o DRE da planilha) |
+| 4 | **DRE**, ponto de equilíbrio e **custo por aluno** | ✅ incluído no módulo de Custos/DRE |
+| 5 | **Saídas**: PDF (modelo do PowerPoint) e `.docx` editável | ⏳ próximo |
 | 6 | **Publicação**: login, banco de dados, multi-escola, hospedagem segura | ⏳ |
 
 ## Pontos a confirmar com o cliente

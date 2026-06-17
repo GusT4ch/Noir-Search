@@ -20,6 +20,12 @@ from .tributos import (
     encargos_inss_para_regime,
     inss_patronal_pct,
 )
+from .dre import (
+    DREInput,
+    DREResultado,
+    LinhaCusto,
+    calcular_dre,
+)
 
 __all__ = [
     "SegmentoInput",
@@ -36,4 +42,8 @@ __all__ = [
     "calcular_tributos",
     "encargos_inss_para_regime",
     "inss_patronal_pct",
+    "DREInput",
+    "DREResultado",
+    "LinhaCusto",
+    "calcular_dre",
 ]

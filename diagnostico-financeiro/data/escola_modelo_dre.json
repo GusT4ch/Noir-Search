@@ -1,0 +1,47 @@
+{
+  "escola": "Escola Modelo (Ágora)",
+  "ano": 2025,
+  "niveis": ["Ensino Infantil", "Fundamental I", "Fundamental II", "Ensino Médio"],
+  "receita_liquida_total": 842055.80,
+  "receita_por_nivel": {
+    "Ensino Infantil": 202871.0,
+    "Fundamental I": 366752.0,
+    "Fundamental II": 197016.0,
+    "Ensino Médio": 52455.0
+  },
+  "alunos_por_nivel": {
+    "Ensino Infantil": 178,
+    "Fundamental I": 314,
+    "Fundamental II": 156,
+    "Ensino Médio": 39
+  },
+  "depreciacao": 6736.45,
+  "juros": 900.0,
+  "irpj": 0.0,
+  "csll": 0.0,
+  "custos": [
+    {"nome": "Salários docentes", "valor": 188933.61, "classe": "direto", "grupo": "Custo Docentes"},
+    {"nome": "Encargos sociais docentes", "valor": 38295.19, "classe": "direto", "grupo": "Custo Docentes"},
+    {"nome": "Alimentação docentes", "valor": 682.62, "classe": "direto", "grupo": "Custo Docentes"},
+    {"nome": "Vale transporte docentes", "valor": 3400.0, "classe": "direto", "grupo": "Custo Docentes"},
+    {"nome": "Livros", "valor": 250.0, "classe": "direto", "grupo": "Material Didático"},
+    {"nome": "Material curso técnico", "valor": 150.0, "classe": "direto", "grupo": "Material Didático"},
+    {"nome": "Parcelamentos", "valor": 2000.0, "classe": "direto", "grupo": "Impostos s/ Faturamento", "variavel": true},
+    {"nome": "Simples Nacional (DAS)", "valor": 92778.73, "classe": "direto", "grupo": "Impostos s/ Faturamento", "variavel": true},
+    {"nome": "Evasão escolar", "valor": 8420.56, "classe": "direto", "grupo": "Provisões", "variavel": true},
+    {"nome": "Inadimplência", "valor": 64838.30, "classe": "direto", "grupo": "Provisões", "variavel": true},
+    {"nome": "Reequipamento", "valor": 23577.56, "classe": "direto", "grupo": "Provisões", "variavel": true},
+
+    {"nome": "Custo coordenação / aux. pedagógicos", "valor": 40954.98, "classe": "indireto", "grupo": "Coordenação"},
+    {"nome": "Custo pessoal administrativo", "valor": 132189.73, "classe": "indireto", "grupo": "Administrativo"},
+    {"nome": "Pró-labore", "valor": 51040.0, "classe": "indireto", "grupo": "Pró-labore"},
+    {"nome": "Serviços de terceiros", "valor": 9500.0, "classe": "indireto", "grupo": "Serviços de Terceiros"},
+    {"nome": "Despesas de vendas / propaganda", "valor": 3550.0, "classe": "indireto", "grupo": "Marketing"},
+    {"nome": "Aluguéis e arrendamentos", "valor": 70396.0, "classe": "indireto", "grupo": "Aluguéis"},
+    {"nome": "Impostos / taxas / sindicais", "valor": 467.20, "classe": "indireto", "grupo": "Impostos e Taxas"},
+    {"nome": "Serviços (água, energia, telefone, seguro)", "valor": 4516.0, "classe": "indireto", "grupo": "Utilidades"},
+    {"nome": "Utilidades", "valor": 8330.0, "classe": "indireto", "grupo": "Utilidades"},
+    {"nome": "Despesas gerais de administração", "valor": 40949.58, "classe": "indireto", "grupo": "Despesas Administrativas"},
+    {"nome": "Despesas financeiras", "valor": 22103.80, "classe": "indireto", "grupo": "Despesas Financeiras"}
+  ]
+}
