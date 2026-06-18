@@ -239,6 +239,31 @@ def health() -> dict:
     return {"status": "ok"}
 
 
+@app.get("/api/relatorio/{formato}")
+def baixar_relatorio(formato: str, regime: str = "simples"):
+    """Gera o diagnóstico consolidado (exemplo) em docx, pptx ou pdf."""
+    import tempfile
+
+    from report.consolidado import montar_diagnostico_exemplo
+    from report.gerar import gerar_docx, gerar_pdf, gerar_pptx
+
+    formato = formato.lower()
+    geradores = {
+        "docx": (gerar_docx, "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+        "pptx": (gerar_pptx, "application/vnd.openxmlformats-officedocument.presentationml.presentation"),
+        "pdf": (gerar_pdf, "application/pdf"),
+    }
+    if formato not in geradores:
+        return {"erro": "Formato inválido. Use docx, pptx ou pdf."}
+
+    gerar, media_type = geradores[formato]
+    diag = montar_diagnostico_exemplo(regime)
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=f".{formato}")
+    tmp.close()
+    gerar(diag, tmp.name)
+    return FileResponse(tmp.name, media_type=media_type, filename=f"Diagnostico.{formato}")
+
+
 @app.get("/")
 def index() -> FileResponse:
     return FileResponse(os.path.join(WEB_DIR, "index.html"))

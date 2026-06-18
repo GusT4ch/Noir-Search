@@ -130,6 +130,15 @@ python -m unittest discover -s tests -v
   - Endpoint: `POST /api/swot`. Tela: `web/Analise-SWOT.html` — a bolinha se
     move em tempo real conforme a escola ajusta as notas.
 
+- **Relatório / Saídas** (`report/`) — consolida todos os módulos e gera o
+  diagnóstico em três formatos:
+  - **`.docx`** (Word editável), **`.pptx`** (apresentação no formato do
+    PowerPoint) e **`.pdf`** (paisagem, estilo slides).
+  - `report/consolidado.py` roda Receitas + Folha + Tributos + DRE + SWOT e
+    monta a estrutura única; `report/gerar.py` produz os arquivos.
+  - Endpoint: `GET /api/relatorio/{formato}?regime=simples` (formato =
+    `docx` | `pptx` | `pdf`).
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões
