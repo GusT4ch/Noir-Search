@@ -45,7 +45,7 @@ from engine import (
 
 WEB_DIR = os.path.join(os.path.dirname(__file__), "..", "web")
 
-app = FastAPI(title="Diagnóstico Financeiro — Receitas", version="0.1.0")
+app = FastAPI(title="Diagnóstico Financeiro", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,6 +53,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- Publicação: banco de dados, login e multi-escola ---
+from db.bootstrap import init_db  # noqa: E402
+from .auth import router as auth_router  # noqa: E402
+from .publicacao import router as publicacao_router  # noqa: E402
+
+
+@app.on_event("startup")
+def _startup() -> None:
+    init_db()
+
+
+app.include_router(auth_router)
+app.include_router(publicacao_router)
 
 
 # --------------------------------------------------------------------------- #

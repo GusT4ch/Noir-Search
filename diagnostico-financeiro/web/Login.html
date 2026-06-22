@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico Financeiro — Acesso</title>
+<style>
+  :root{--azul:#1f3a5f;--azul2:#2e5c8a;--verde:#2e8b57;--cinza:#f4f6f9;--linha:#e1e6ee;--texto:#23303f;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--texto);background:var(--cinza)}
+  header{background:var(--azul);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
+  header h1{margin:0;font-size:18px}
+  main{max-width:880px;margin:40px auto;padding:0 20px}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:22px;margin-bottom:18px}
+  .card h2{margin:0 0 14px;font-size:16px;color:var(--azul)}
+  label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+  input,select{width:100%;padding:9px 11px;border:1px solid var(--linha);border-radius:6px;font-size:14px}
+  button{cursor:pointer;border:none;border-radius:6px;padding:10px 18px;font-size:14px;font-weight:700}
+  .btn{background:var(--verde);color:#fff} .btn2{background:#eef3fa;color:var(--azul2)}
+  .login{max-width:380px;margin:8vh auto}
+  .erro{color:#b23b3b;font-size:13px;margin-top:8px}
+  .hidden{display:none}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--linha);text-align:left}
+  thead th{color:var(--azul);font-size:12px;text-transform:uppercase}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tag{font-size:11px;background:#eef3fa;color:var(--azul2);padding:2px 8px;border-radius:10px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Diagnóstico Econômico-Financeiro</h1>
+  <div id="userbox" class="hidden">
+    <span id="who"></span>
+    <button class="btn2" onclick="sair()">Sair</button>
+  </div>
+</header>
+
+<main>
+  <!-- LOGIN -->
+  <section id="tela-login" class="login">
+    <div class="card">
+      <h2>Acessar</h2>
+      <label>E-mail</label><input id="email" type="email" placeholder="voce@escola.com" />
+      <label>Senha</label><input id="senha" type="password" placeholder="••••••" />
+      <div style="margin-top:16px"><button class="btn" onclick="entrar()">Entrar</button></div>
+      <div class="erro" id="erro"></div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section id="tela-portal" class="hidden">
+    <div class="card" id="card-novo-cons">
+      <h2>Cadastrar nova escola <span class="tag">consultor</span></h2>
+      <div class="row">
+        <div><label>Nome da escola</label><input id="nova-escola" /></div>
+        <div><label>CNPJ (opcional)</label><input id="novo-cnpj" /></div>
+      </div>
+      <div style="margin-top:14px"><button class="btn2" onclick="criarEscola()">+ Adicionar escola</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Escolas</h2>
+      <table><thead><tr><th>Escola</th><th>CNPJ</th><th>Diagnósticos</th></tr></thead>
+        <tbody id="lista-escolas"></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>Diagnósticos salvos</h2>
+      <table><thead><tr><th>Escola</th><th>Ano</th><th>Título</th><th>Atualizado</th></tr></thead>
+        <tbody id="lista-diag"></tbody></table>
+      <p style="font-size:13px;color:#76808d;margin-top:10px">
+        As telas de preenchimento (Receitas, Folha, Regime, DRE, SWOT) e os relatórios
+        (.docx/.pptx/.pdf) usam estes dados. Esta página cuida do acesso e do histórico por escola.
+      </p>
+    </div>
+  </section>
+</main>
+
+<script>
+const API = location.origin;
+let TOKEN = localStorage.getItem("token") || "";
+let USER = JSON.parse(localStorage.getItem("user") || "null");
+
+function headers(){ return {"Content-Type":"application/json","Authorization":"Bearer "+TOKEN}; }
+
+async function entrar(){
+  document.getElementById("erro").textContent = "";
+  const r = await fetch(API+"/api/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email:document.getElementById("email").value,senha:document.getElementById("senha").value})});
+  if(!r.ok){ document.getElementById("erro").textContent = "E-mail ou senha inválidos."; return; }
+  const d = await r.json();
+  TOKEN = d.token; USER = d.usuario;
+  localStorage.setItem("token",TOKEN); localStorage.setItem("user",JSON.stringify(USER));
+  mostrarPortal();
+}
+function sair(){ TOKEN=""; USER=null; localStorage.clear(); location.reload(); }
+
+function mostrarPortal(){
+  document.getElementById("tela-login").classList.add("hidden");
+  document.getElementById("tela-portal").classList.remove("hidden");
+  document.getElementById("userbox").classList.remove("hidden");
+  document.getElementById("who").textContent = USER.nome + " ("+USER.papel+")  ";
+  document.getElementById("card-novo-cons").style.display = USER.papel==="consultor" ? "" : "none";
+  carregar();
+}
+
+async function criarEscola(){
+  const nome=document.getElementById("nova-escola").value.trim(); if(!nome) return;
+  await fetch(API+"/api/escolas",{method:"POST",headers:headers(),
+    body:JSON.stringify({nome,cnpj:document.getElementById("novo-cnpj").value||null})});
+  document.getElementById("nova-escola").value=""; document.getElementById("novo-cnpj").value="";
+  carregar();
+}
+
+async function carregar(){
+  const escolas = await (await fetch(API+"/api/escolas",{headers:headers()})).json();
+  const diag = await (await fetch(API+"/api/diagnosticos",{headers:headers()})).json();
+  const porEscola = {}; diag.forEach(d=>porEscola[d.escola_id]=(porEscola[d.escola_id]||0)+1);
+  const nomeEscola = {}; escolas.forEach(e=>nomeEscola[e.id]=e.nome);
+  document.getElementById("lista-escolas").innerHTML = escolas.map(e=>
+    `<tr><td>${e.nome}</td><td>${e.cnpj||"—"}</td><td>${porEscola[e.id]||0}</td></tr>`).join("")
+    || `<tr><td colspan=3 style="color:#999">Nenhuma escola.</td></tr>`;
+  document.getElementById("lista-diag").innerHTML = diag.map(d=>
+    `<tr><td>${nomeEscola[d.escola_id]||("#"+d.escola_id)}</td><td>${d.ano}</td><td>${d.titulo}</td><td>${(d.atualizado_em||"").slice(0,10)}</td></tr>`).join("")
+    || `<tr><td colspan=4 style="color:#999">Nenhum diagnóstico salvo.</td></tr>`;
+}
+
+// auto-login se já tem token válido
+if(TOKEN && USER){
+  fetch(API+"/api/auth/me",{headers:headers()}).then(r=>{ if(r.ok) mostrarPortal(); else sair(); }).catch(()=>{});
+}
+</script>
+</body>
+</html>

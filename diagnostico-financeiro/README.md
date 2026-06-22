@@ -139,6 +139,20 @@ python -m unittest discover -s tests -v
   - Endpoint: `GET /api/relatorio/{formato}?regime=simples` (formato =
     `docx` | `pptx` | `pdf`).
 
+- **Publicação / acesso multi-escola** (`db/`, `api/auth.py`,
+  `api/publicacao.py`) — login com papéis e dados separados por escola:
+  - **Segurança sem libs frágeis**: senha com PBKDF2-HMAC-SHA256 (`db/security.py`)
+    e token de sessão guardado só como hash.
+  - **Papéis**: *consultor* (vê todas as escolas, cadastra escolas/usuários) e
+    *escola* (vê apenas a própria).
+  - **Banco**: SQLAlchemy. Padrão SQLite; em produção, defina `DATABASE_URL`
+    para PostgreSQL (ex.: `postgresql+psycopg://...`).
+  - **Admin inicial**: definido por `ADMIN_EMAIL` / `ADMIN_SENHA`.
+  - Endpoints: `POST /api/auth/login`, `/logout`, `GET /api/auth/me`,
+    `POST/GET /api/escolas`, `POST /api/usuarios`,
+    `POST/GET /api/diagnosticos`, `GET /api/diagnosticos/{id}`.
+  - Tela: `web/Login.html` (login + portal de escolas e diagnósticos).
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões

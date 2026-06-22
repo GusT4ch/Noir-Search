@@ -53,7 +53,8 @@ Navegador (escola/consultor)
 | 4 | **DRE**, ponto de equilíbrio e **custo por aluno** | ✅ incluído no módulo de Custos/DRE |
 | 4b | **Análise SWOT interativa** (bolinha que se move pelos quadrantes) | ✅ motor + testes + tela interativa |
 | 5 | **Saídas**: relatório em `.docx`, `.pptx` (PowerPoint) e `.pdf` | ✅ consolidador + geradores + testes |
-| 6 | **Publicação**: login, banco de dados, multi-escola, hospedagem segura | ⏳ próximo |
+| 6 | **Publicação**: login, banco de dados, multi-escola | ✅ backend (auth + multi-escola + BD) + testes + tela de login |
+| 6b | **Hospedagem**: subir em servidor (São Paulo/PostgreSQL) | ⏳ quando você decidir publicar |
 
 ## Pontos a confirmar com o cliente
 
