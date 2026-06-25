@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico — Painel Consolidado</title>
+<style>
+  :root{--azul:#1f3a5f;--azul2:#2e5c8a;--verde:#2e8b57;--cinza:#f4f6f9;--linha:#e1e6ee;--texto:#23303f;--laranja:#b06a1f;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--texto);background:var(--cinza)}
+  header{background:var(--azul);color:#fff;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  header h1{margin:0;font-size:19px} header p{margin:3px 0 0;opacity:.85;font-size:13px}
+  main{max-width:1100px;margin:0 auto;padding:24px}
+  .regimes{display:flex;gap:8px}
+  .rbtn{cursor:pointer;border:2px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:8px;padding:7px 13px;font-weight:700;font-size:13px}
+  .rbtn.ativo{background:#fff;color:var(--azul)}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+  .kpi{background:var(--azul);color:#fff;border-radius:10px;padding:16px}
+  .kpi .v{font-size:21px;font-weight:700}.kpi .l{font-size:12px;opacity:.85;margin-top:2px}
+  .kpi.alt{background:var(--verde)}.kpi.warn{background:var(--laranja)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:18px;margin-bottom:18px}
+  .card h2{margin:0 0 12px;font-size:15px;color:var(--azul)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:7px 9px;border-bottom:1px solid var(--linha);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--azul);font-size:11px;text-transform:uppercase}
+  tfoot td{font-weight:700;background:#f7f9fc}
+  .pos{display:inline-block;padding:4px 10px;border-radius:12px;font-weight:700;font-size:13px;background:#eef7f0;color:var(--verde)}
+  @media(max-width:820px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Painel Consolidado do Diagnóstico</h1><p id="sub">carregando…</p></div>
+  <div class="regimes">
+    <button class="rbtn ativo" data-r="simples" onclick="setReg('simples')">Simples</button>
+    <button class="rbtn" data-r="presumido" onclick="setReg('presumido')">Presumido</button>
+    <button class="rbtn" data-r="real" onclick="setReg('real')">Real</button>
+  </div>
+</header>
+
+<main>
+  <div class="kpis" id="kpis"></div>
+  <div class="cols">
+    <div class="card"><h2>DRE — Demonstrativo de Resultado (mês)</h2><table id="dre"><tbody></tbody></table></div>
+    <div>
+      <div class="card"><h2>Custo por aluno (mês)</h2><table id="cpa"><thead><tr><th>Nível</th><th>Alunos</th><th>Custo/aluno</th><th>Resultado</th></tr></thead><tbody></tbody></table></div>
+      <div class="card"><h2>Tributos (regime atual)</h2><table id="trib"><tbody></tbody></table></div>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card"><h2>Receitas por nível</h2><table id="rec"><thead><tr><th>Nível</th><th>Alunos</th><th>Receita bruta</th><th>Particip.</th></tr></thead><tbody></tbody></table></div>
+    <div class="card"><h2>Folha por categoria</h2><table id="folha"><thead><tr><th>Categoria</th><th>Salário</th><th>Custo total</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="card"><h2>Posição estratégica (SWOT)</h2>
+    <p>Quadrante: <span class="pos" id="swot-pos">—</span></p>
+    <p id="swot-rec" style="font-size:13.5px;color:#3a4756"></p>
+    <table id="swot"><tbody></tbody></table>
+  </div>
+</main>
+
+<script>
+const API=location.origin; let regime="simples";
+const BRL=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const PCT=v=>((v||0)*100).toFixed(1).replace('.',',')+'%';
+const tb=id=>document.querySelector('#'+id+' tbody');
+function rows(id,arr){ tb(id).innerHTML=arr.map(r=>'<tr>'+r.map((c,i)=>`<td>${c}</td>`).join('')+'</tr>').join(''); }
+
+function setReg(r){ regime=r; document.querySelectorAll('.rbtn').forEach(b=>b.classList.toggle('ativo',b.dataset.r===r)); carregar(); }
+
+async function carregar(){
+  const d=await (await fetch(API+'/api/diagnostico-exemplo?regime='+regime)).json();
+  document.getElementById('sub').textContent=`${d.meta.escola} · ${d.meta.ano} · regime ${d.meta.regime}`;
+  const R=d.resumo;
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="v">${BRL(R.receita_liquida_mensal)}</div><div class="l">Receita líquida/mês</div></div>
+    <div class="kpi warn"><div class="v">${BRL(R.custo_total_mensal)}</div><div class="l">Custo total/mês</div></div>
+    <div class="kpi alt"><div class="v">${BRL(R.lucro_operacional_mensal)}</div><div class="l">Lucro operacional/mês (${PCT(R.margem_liquida_pct)})</div></div>
+    <div class="kpi"><div class="v">${BRL(R.ponto_equilibrio_receita)}</div><div class="l">Ponto de equilíbrio/mês</div></div>
+    <div class="kpi"><div class="v">${R.alunos_total}</div><div class="l">Total de alunos</div></div>`;
+
+  const dre=d.dre.dre, ind=d.dre.indicadores;
+  rows('dre',[
+    ['Receita Líquida',BRL(dre.receita_liquida)],
+    ['(-) Custos Diretos',BRL(-dre.custos_diretos)],
+    ['(=) Margem de Contribuição',BRL(dre.margem_contribuicao)],
+    ['(-) Custos Indiretos',BRL(-dre.custos_indiretos)],
+    ['(=) EBITDA ('+PCT(ind.margem_ebitda_pct)+')',BRL(dre.ebitda)],
+    ['(-) Depreciação',BRL(-dre.depreciacao)],['(-) Juros',BRL(-dre.juros)],
+    ['(-) IRPJ / CSLL',BRL(-(dre.irpj+dre.csll))],
+    ['(=) Lucro Operacional',BRL(dre.lucro_operacional)],
+  ]);
+
+  rows('cpa',Object.entries(d.dre.por_nivel).map(([n,v])=>[n,v.alunos,BRL(v.custo_por_aluno_mes),BRL(v.resultado)]));
+
+  const t=d.tributos;
+  rows('trib',[
+    ['Carga efetiva sobre a receita',PCT(t.carga_efetiva_sobre_receita)],
+    ['Tributos sobre a receita/mês',BRL(t.total_sobre_receita)],
+    ['INSS patronal sobre a folha',PCT(t.inss_patronal_pct)],
+  ]);
+
+  rows('rec',d.receitas.segmentos.map(s=>[s.nome,s.alunos,BRL(s.receita_bruta),s.participacao_pct+'%']));
+
+  const lab={docente:'Professores e Auxiliares',coordenacao:'Coordenação e Supervisão',administrativo:'Administrativo'};
+  rows('folha',['docente','coordenacao','administrativo'].map(k=>{const c=d.folha.por_categoria[k];return [lab[k],BRL(c.salario_bruto),BRL(c.custo_total)];}));
+
+  const sw=d.swot;
+  document.getElementById('swot-pos').textContent=sw.postura;
+  document.getElementById('swot-rec').textContent=sw.recomendacao;
+  rows('swot',[
+    ['Forças',sw.scores.forca],['Fraquezas',sw.scores.fraqueza],
+    ['Oportunidades',sw.scores.oportunidade],['Ameaças',sw.scores.ameaca],
+    ['Eixo interno (F−Fr)',sw.eixo_interno],['Eixo externo (O−A)',sw.eixo_externo],
+  ]);
+}
+carregar();
+</script>
+</body>
+</html>

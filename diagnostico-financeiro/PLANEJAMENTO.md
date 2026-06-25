@@ -54,7 +54,8 @@ Navegador (escola/consultor)
 | 4b | **Análise SWOT interativa** (bolinha que se move pelos quadrantes) | ✅ motor + testes + tela interativa |
 | 5 | **Saídas**: relatório em `.docx`, `.pptx` (PowerPoint) e `.pdf` | ✅ consolidador + geradores + testes |
 | 6 | **Publicação**: login, banco de dados, multi-escola | ✅ backend (auth + multi-escola + BD) + testes + tela de login |
-| 6b | **Hospedagem**: subir em servidor (São Paulo/PostgreSQL) | ⏳ quando você decidir publicar |
+| 6b | **Hospedagem**: pacote de deploy (Docker + PostgreSQL + HTTPS) e guia | ✅ pronto (`Dockerfile`, `docker-compose.yml`, `DEPLOY.md`) — falta só executar no servidor |
+| 7 | **Painel consolidado** + página inicial (hub) | ✅ `web/Painel.html` + `web/Home.html` |
 
 ## Pontos a confirmar com o cliente
 

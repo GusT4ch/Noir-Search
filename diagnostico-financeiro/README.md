@@ -153,6 +153,17 @@ python -m unittest discover -s tests -v
     `POST/GET /api/diagnosticos`, `GET /api/diagnosticos/{id}`.
   - Tela: `web/Login.html` (login + portal de escolas e diagnósticos).
 
+- **Painel consolidado e início** — `web/Home.html` (hub com links para todos
+  os módulos e relatórios) e `web/Painel.html` (visão geral: receita, folha,
+  tributos, DRE, custo por aluno e SWOT numa tela só, com troca de regime ao
+  vivo). Endpoint de apoio: `GET /api/diagnostico-exemplo?regime=...`.
+
+## Publicação (hospedagem)
+
+O projeto já vem pronto para subir via Docker (banco PostgreSQL + aplicação +
+HTTPS automático). Veja o passo a passo em **[DEPLOY.md](DEPLOY.md)**:
+`Dockerfile`, `docker-compose.yml`, `Caddyfile` e `.env.example`.
+
 ## Próximos passos (roadmap)
 
 Ver **[PLANEJAMENTO.md](PLANEJAMENTO.md)** para o roteiro completo e as decisões

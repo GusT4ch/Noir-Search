@@ -278,9 +278,17 @@ def baixar_relatorio(formato: str, regime: str = "simples"):
     return FileResponse(tmp.name, media_type=media_type, filename=f"Diagnostico.{formato}")
 
 
+@app.get("/api/diagnostico-exemplo")
+def diagnostico_exemplo(regime: str = "simples") -> dict:
+    """Diagnóstico consolidado (todos os módulos) a partir dos dados de exemplo."""
+    from report.consolidado import montar_diagnostico_exemplo
+
+    return montar_diagnostico_exemplo(regime)
+
+
 @app.get("/")
 def index() -> FileResponse:
-    return FileResponse(os.path.join(WEB_DIR, "index.html"))
+    return FileResponse(os.path.join(WEB_DIR, "Home.html"))
 
 
 # Arquivos estáticos (css/js/imagens), se houver
